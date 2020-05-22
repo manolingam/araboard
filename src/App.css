@@ -5,7 +5,7 @@
 	align-items: center;
 	position: absolute;
 	top: 15px;
-	left: 15px;
+	right: 15px;
 }
 
 .app {
@@ -89,4 +89,39 @@ h6 {
 	margin-left: auto;
 	font-size: 12pt;
 	font-weight: 700;
+}
+
+@media only screen and (max-width: 1000px) {
+	.switch {
+		top: 25px;
+	}
+	.component-container {
+		min-width: 85%;
+		max-width: 85%;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.switch {
+		font-size: 8pt;
+	}
+	h1 {
+		font-size: 23pt;
+	}
+	h2 {
+		font-size: 17pt;
+	}
+	h3 {
+		font-size: 8pt;
+	}
+	h4 {
+		font-size: 16pt;
+	}
+	h5 {
+		font-size: 10pt;
+		padding: 10px;
+	}
+	h6 {
+		font-size: 7pt;
+	}
 }

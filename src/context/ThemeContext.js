@@ -8,7 +8,7 @@ class ThemeContextProvider extends Component {
 		darkTheme: {
 			subTitle: '#DDE4E9',
 			titleHelper: '#828F9A',
-			appBackground: 'rgb(23, 28, 32)',
+			appBackground: '#192029',
 			borderColor: '#4a5661',
 			metricTitle: '#DDE4E9',
 			metricBoxHeaderTitle: '#DDE4E9',
@@ -20,6 +20,9 @@ class ThemeContextProvider extends Component {
 			firstInSeries: '#0792AF',
 			secondInSeries: '#26B4AD',
 			thirdInSeries: '#7C80F2',
+			firstInSeriesPoint: '#08bee5',
+			secondInSeriesPoint: '#3fe8e0',
+			thirdInSeriesPoint: '#7c80f2',
 		},
 		lightTheme: {
 			subTitle: 'rgb(23, 28, 32)',
@@ -36,6 +39,9 @@ class ThemeContextProvider extends Component {
 			firstInSeries: '#0792AF',
 			secondInSeries: '#26B4AD',
 			thirdInSeries: '#7C80F2',
+			firstInSeriesPoint: '#08bee5',
+			secondInSeriesPoint: '#3fe8e0',
+			thirdInSeriesPoint: '#7c80f2',
 		},
 	};
 	switchTheme = () => {

@@ -18,3 +18,20 @@
 .ant-metrics-stats .graph-container {
 	width: 100%;
 }
+
+@media only screen and (max-width: 1000px) {
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.ant-metrics-stats {
+		display: flex;
+		flex-direction: row;
+		padding: 30px;
+		border-bottom-left-radius: 8.5px;
+		border-bottom-right-radius: 8.5px;
+	}
+	.individual-stats {
+		width: 100%;
+	}
+}

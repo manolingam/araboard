@@ -104,6 +104,7 @@ class AntMetrics extends Component {
 							metric='20.1k'
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.firstInSeriesPoint}
 						/>
 					</div>
 				</div>

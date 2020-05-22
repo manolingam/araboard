@@ -1,5 +1,4 @@
 .graph-container {
-	/* width: 100%; */
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -22,4 +21,15 @@
 
 .chart-container {
 	height: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+	.graph-container {
+		flex-direction: column;
+		min-width: 100%;
+		margin: 0;
+	}
+	.graph-container .stats {
+		width: auto;
+	}
 }

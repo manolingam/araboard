@@ -21,3 +21,22 @@
 	font-weight: 400;
 	max-width: 50%;
 }
+
+@media only screen and (max-width: 1000px) {
+	.title-element {
+		max-width: 85%;
+	}
+	.container-1 {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.container-1 h1 {
+		max-width: 70%;
+	}
+	.title-element .container-1 p {
+		margin: 0;
+	}
+	.title-element .container-2 p {
+		max-width: 100%;
+	}
+}

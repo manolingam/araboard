@@ -17,7 +17,6 @@ class GraphContainer extends Component {
 				datasets: [
 					{
 						label: '',
-
 						data: [
 							100,
 							200,
@@ -31,8 +30,8 @@ class GraphContainer extends Component {
 							600,
 						],
 						pointBorderWidth: 6,
-						pointBackgroundColor: this.props.metricTitle,
-						borderColor: this.props.metricTitle,
+						pointBackgroundColor: this.props.pointColor,
+						borderColor: this.props.pointColor,
 						borderWidth: 2,
 						borderDash: [7, 5],
 						backgroundColor: 'transparent',

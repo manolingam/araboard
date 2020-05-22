@@ -51,12 +51,14 @@ class AnjMetrics extends Component {
 							metric='275'
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.firstInSeriesPoint}
 						/>
 						<GraphContainer
 							title='ANJ Activated'
 							metric='80.3m'
 							metricTitle={theme.secondInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.secondInSeriesPoint}
 						/>
 					</div>
 				</div>
@@ -87,18 +89,21 @@ class AnjMetrics extends Component {
 							metric='$0.18'
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.firstInSeriesPoint}
 						/>
 						<GraphContainer
 							title='Supply'
 							metric='40m'
 							metricTitle={theme.secondInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.secondInSeriesPoint}
 						/>
 						<GraphContainer
 							title='Network Val.'
 							metric='1.3m'
 							metricTitle={theme.thirdInSeries}
 							metricNumber={theme.metricNumbers}
+							pointColor={theme.thirdInSeriesPoint}
 						/>
 					</div>
 				</div>
