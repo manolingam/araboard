@@ -1,0 +1,110 @@
+import React, { Component } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import GraphContainer from '../../template/graphContainer/GraphContainer';
+
+import UIGraphicTwo from '../../assets/araboard-UI-graphic2.png';
+
+import './AnjMetrics.css';
+
+class AnjMetrics extends Component {
+	static contextType = ThemeContext;
+	render() {
+		const { isLight, lightTheme, darkTheme } = this.context;
+		const theme = isLight ? lightTheme : darkTheme;
+		return (
+			<div className='component-container'>
+				<div className='metric-title-container'>
+					<h2 style={{ color: theme.metricTitle }}>ANJ Metrics</h2>
+					<img
+						src={UIGraphicTwo}
+						height='110px'
+						width='auto'
+						alt=''
+					/>
+				</div>
+
+				<div
+					className='component-sub-container anj'
+					style={{ borderColor: theme.borderColor }}
+				>
+					<div
+						className='box-title'
+						style={{
+							backgroundColor: theme.metricBoxHeaderBg,
+							borderColor: theme.borderColor,
+						}}
+					>
+						<h3 style={{ color: theme.metricBoxHeaderTitle }}>
+							ARAGON COURT
+						</h3>
+						<h6 style={{ color: theme.metricBoxHelper }}>
+							Read more
+						</h6>
+					</div>
+
+					<div
+						className='stats'
+						style={{ backgroundColor: theme.metricBoxBg }}
+					>
+						<GraphContainer
+							title='No. of Jurors'
+							metric='275'
+							metricTitle={theme.firstInSeries}
+							metricNumber={theme.metricNumbers}
+						/>
+						<GraphContainer
+							title='ANJ Activated'
+							metric='80.3m'
+							metricTitle={theme.secondInSeries}
+							metricNumber={theme.metricNumbers}
+						/>
+					</div>
+				</div>
+				<div
+					className='component-sub-container anj'
+					style={{ borderColor: theme.borderColor }}
+				>
+					<div
+						className='box-title'
+						style={{
+							backgroundColor: theme.metricBoxHeaderBg,
+							borderColor: theme.borderColor,
+						}}
+					>
+						<h3 style={{ color: theme.metricBoxHeaderTitle }}>
+							ARAGON NETWORK JUROR TOKEN
+						</h3>
+						<h6 style={{ color: theme.metricBoxHelper }}>
+							Read more
+						</h6>
+					</div>
+					<div
+						className='stats'
+						style={{ backgroundColor: theme.metricBoxBg }}
+					>
+						<GraphContainer
+							title='Price'
+							metric='$0.18'
+							metricTitle={theme.firstInSeries}
+							metricNumber={theme.metricNumbers}
+						/>
+						<GraphContainer
+							title='Supply'
+							metric='40m'
+							metricTitle={theme.secondInSeries}
+							metricNumber={theme.metricNumbers}
+						/>
+						<GraphContainer
+							title='Network Val.'
+							metric='1.3m'
+							metricTitle={theme.thirdInSeries}
+							metricNumber={theme.metricNumbers}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+export default AnjMetrics;

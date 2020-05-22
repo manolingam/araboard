@@ -1,0 +1,92 @@
+.switch {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 10px;
+}
+
+.app {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-x: hidden;
+}
+
+.component-container {
+	display: flex;
+	flex-direction: column;
+	max-width: 70%;
+	min-width: 70%;
+}
+
+.component-sub-container {
+	display: flex;
+	flex-direction: column;
+	border: 1pt solid;
+	border-radius: 10px;
+	margin-bottom: 50px;
+}
+
+.metric-title-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+.metric-title-container img {
+	margin-left: auto;
+	margin-right: 20px;
+}
+
+.box-title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1pt solid;
+	height: 40px;
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+h1 {
+	font-size: 28pt;
+	font-weight: bold;
+	background: linear-gradient(#3fe8e0, #08bee5);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+h2 {
+	font-size: 22pt;
+	font-weight: 800;
+}
+
+h3 {
+	font-size: 13pt;
+	font-weight: 700;
+}
+
+h4 {
+	font-size: 21pt;
+	font-weight: bold;
+	margin: 0;
+}
+
+h5 {
+	font-size: 15pt;
+	font-weight: 700;
+	padding: 20px;
+	margin: 0;
+}
+
+h6 {
+	margin-left: auto;
+	font-size: 12pt;
+	font-weight: 700;
+}
