@@ -14,3 +14,7 @@
 	width: 25%;
 	padding: 20px;
 }
+
+.ant-metrics-stats .graph-container {
+	width: 100%;
+}

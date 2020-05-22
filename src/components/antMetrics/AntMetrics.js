@@ -96,7 +96,7 @@ class AntMetrics extends Component {
 						</h6>
 					</div>
 					<div
-						className='stats'
+						className='stats ant-metrics-stats'
 						style={{ backgroundColor: theme.metricBoxBg }}
 					>
 						<GraphContainer
