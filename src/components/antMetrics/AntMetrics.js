@@ -105,6 +105,7 @@ class AntMetrics extends Component {
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.firstInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 					</div>
 				</div>

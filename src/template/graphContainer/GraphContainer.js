@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 
 import './GraphContainer.css';
+import { red } from '@material-ui/core/colors';
 
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
@@ -46,18 +47,22 @@ class GraphContainer extends Component {
 					enabled: false,
 				},
 				maintainAspectRatio: false,
+
 				scales: {
 					yAxes: [
 						{
 							stacked: true,
 							gridLines: {
 								display: true,
-								color: '#4A5661',
+								color:  this.props.axesColor,
+								zeroLineColor: this.props.pointColor,
+								tickMarkLength: 0,
 							},
 							ticks: {
 								min: 0,
 								max: 1000,
 								stepSize: 250,
+								padding: 10,
 								callback: function (label, index, labels) {
 									switch (label) {
 										case 0:
@@ -81,7 +86,9 @@ class GraphContainer extends Component {
 						{
 							gridLines: {
 								display: true,
-								color: '#4A5661',
+								color:  this.props.axesColor,
+								zeroLineColor: this.props.pointColor,
+								tickMarkLength: 0,
 							},
 						},
 					],

@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 class ThemeContextProvider extends Component {
 	state = {
-		isLight: true,
+		isLight: false,
 		darkTheme: {
 			subTitle: '#DDE4E9',
 			titleHelper: '#828F9A',
@@ -23,15 +23,16 @@ class ThemeContextProvider extends Component {
 			firstInSeriesPoint: '#08bee5',
 			secondInSeriesPoint: '#3fe8e0',
 			thirdInSeriesPoint: '#7c80f2',
+			axesGridLines: '#4A5661',
 		},
 		lightTheme: {
 			subTitle: 'rgb(23, 28, 32)',
 			titleHelper: '#828F9A',
-			appBackground: 'white',
-			borderColor: '#edf4f2',
+			appBackground: '#F9FAFC',
+			borderColor: '#DDE4E9',
 			metricTitle: 'rgb(23, 28, 32)',
 			metricBoxHeaderTitle: 'rgb(23, 28, 32)',
-			metricBoxHeaderBg: '#edf4f2',
+			metricBoxHeaderBg: '#e7eaef',
 			metricBoxHelper: '#637381',
 			metricBoxBg: ' white',
 			antMetricStatsTitle: '#637381',
@@ -42,6 +43,7 @@ class ThemeContextProvider extends Component {
 			firstInSeriesPoint: '#08bee5',
 			secondInSeriesPoint: '#3fe8e0',
 			thirdInSeriesPoint: '#7c80f2',
+			axesGridLines: '#DDE4E9',
 		},
 	};
 	switchTheme = () => {
