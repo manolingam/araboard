@@ -34,7 +34,7 @@ class ThemeContextProvider extends Component {
 			metricBoxHeaderTitle: 'rgb(23, 28, 32)',
 			metricBoxHeaderBg: '#e7eaef',
 			metricBoxHelper: '#637381',
-			metricBoxBg: ' white',
+			metricBoxBg: 'white',
 			antMetricStatsTitle: '#637381',
 			metricNumbers: 'rgb(23, 28, 32)',
 			firstInSeries: '#0792AF',

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 
 import './GraphContainer.css';
-import { red } from '@material-ui/core/colors';
 
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
 class GraphContainer extends Component {
 	drawCharts = () => {
-		let ctx = document.getElementById(this.props.title).getContext('2d');
-		console.log(this.props.title);
+		let ctx = '';
+		ctx = document.getElementById(this.props.title).getContext('2d');
+
 		new Chart(ctx, {
 			type: 'line',
 			data: {
@@ -53,8 +53,9 @@ class GraphContainer extends Component {
 						{
 							stacked: true,
 							gridLines: {
+								drawBorder: false,
 								display: true,
-								color:  this.props.axesColor,
+								color: this.props.axesColor,
 								zeroLineColor: this.props.pointColor,
 								tickMarkLength: 0,
 							},
@@ -85,8 +86,9 @@ class GraphContainer extends Component {
 					xAxes: [
 						{
 							gridLines: {
+								drawBorder: false,
 								display: true,
-								color:  this.props.axesColor,
+								color: this.props.axesColor,
 								zeroLineColor: this.props.pointColor,
 								tickMarkLength: 0,
 							},
@@ -98,6 +100,10 @@ class GraphContainer extends Component {
 	};
 
 	componentDidMount() {
+		this.drawCharts();
+	}
+
+	componentDidUpdate() {
 		this.drawCharts();
 	}
 

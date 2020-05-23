@@ -11,7 +11,6 @@ class AntMetrics extends Component {
 	render() {
 		const { isLight, lightTheme, darkTheme } = this.context;
 		const theme = isLight ? lightTheme : darkTheme;
-
 		return (
 			<div className='component-container'>
 				<div className='metric-title-container'>
