@@ -11,7 +11,6 @@ class AntMetrics extends Component {
 	render() {
 		const { isLight, lightTheme, darkTheme } = this.context;
 		const theme = isLight ? lightTheme : darkTheme;
-
 		return (
 			<div className='component-container'>
 				<div className='metric-title-container'>
@@ -105,6 +104,7 @@ class AntMetrics extends Component {
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.firstInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 					</div>
 				</div>

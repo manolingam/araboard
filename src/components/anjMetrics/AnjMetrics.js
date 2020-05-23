@@ -52,6 +52,7 @@ class AnjMetrics extends Component {
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.firstInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 						<GraphContainer
 							title='ANJ Activated'
@@ -59,6 +60,7 @@ class AnjMetrics extends Component {
 							metricTitle={theme.secondInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.secondInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 					</div>
 				</div>
@@ -90,6 +92,7 @@ class AnjMetrics extends Component {
 							metricTitle={theme.firstInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.firstInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 						<GraphContainer
 							title='Supply'
@@ -97,6 +100,7 @@ class AnjMetrics extends Component {
 							metricTitle={theme.secondInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.secondInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 						<GraphContainer
 							title='Network Val.'
@@ -104,6 +108,7 @@ class AnjMetrics extends Component {
 							metricTitle={theme.thirdInSeries}
 							metricNumber={theme.metricNumbers}
 							pointColor={theme.thirdInSeriesPoint}
+							axesColor={theme.axesGridLines}
 						/>
 					</div>
 				</div>

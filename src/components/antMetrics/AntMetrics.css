@@ -1,6 +1,7 @@
 .stats {
 	display: flex;
 	flex-direction: row;
+	text-align: center;
 	padding: 30px;
 	border-bottom-left-radius: 8.5px;
 	border-bottom-right-radius: 8.5px;
@@ -13,6 +14,10 @@
 	justify-content: center;
 	width: 25%;
 	padding: 20px;
+}
+
+.ant-metrics-stats .stats{
+	padding: 30px 30px 30px 10px;
 }
 
 .ant-metrics-stats .graph-container {
@@ -33,5 +38,11 @@
 	}
 	.individual-stats {
 		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.stats {
+		padding: 10px;
 	}
 }

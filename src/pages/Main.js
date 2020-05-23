@@ -19,8 +19,7 @@ class Main extends Component {
 					<p
 						style={{
 							marginTop: '0px',
-							color: theme.subTitle,
-							fontWeight: 'bold',
+							color: theme.titleHelper,
 						}}
 					>
 						Day/Night

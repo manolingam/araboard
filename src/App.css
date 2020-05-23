@@ -4,9 +4,10 @@
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: 15px;
-	right: 15px;
+	top: 20px;
+	right: 20px;
 }
+
 
 .app {
 	height: 100%;
@@ -15,6 +16,7 @@
 	flex-direction: column;
 	align-items: center;
 	overflow-x: hidden;
+	padding-top: 30px;
 }
 
 .component-container {
@@ -48,10 +50,18 @@
 	flex-direction: row;
 	align-items: center;
 	border-bottom: 1pt solid;
-	height: 40px;
-	padding: 10px;
+	height: 50px;
+	padding: 10px 15px;
 	border-top-left-radius: 8.5px;
 	border-top-right-radius: 8.5px;
+}
+
+.box-title h6 {
+	font-weight: 500;
+}
+
+.individual-stats h5 {
+	padding-top: 0;
 }
 
 h1 {
@@ -102,6 +112,9 @@ h6 {
 }
 
 @media only screen and (max-width: 450px) {
+	.app {
+		padding-top: 0px;
+	}
 	.switch {
 		font-size: 8pt;
 	}
@@ -112,13 +125,13 @@ h6 {
 		font-size: 17pt;
 	}
 	h3 {
-		font-size: 8pt;
+		font-size: 10pt;
 	}
 	h4 {
 		font-size: 16pt;
 	}
 	h5 {
-		font-size: 10pt;
+		font-size: 12pt;
 		padding: 10px;
 	}
 	h6 {

@@ -7,8 +7,9 @@ Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
 class GraphContainer extends Component {
 	drawCharts = () => {
-		let ctx = document.getElementById(this.props.title).getContext('2d');
-		console.log(this.props.title);
+		let ctx = '';
+		ctx = document.getElementById(this.props.title).getContext('2d');
+
 		new Chart(ctx, {
 			type: 'line',
 			data: {
@@ -46,18 +47,23 @@ class GraphContainer extends Component {
 					enabled: false,
 				},
 				maintainAspectRatio: false,
+
 				scales: {
 					yAxes: [
 						{
 							stacked: true,
 							gridLines: {
+								drawBorder: false,
 								display: true,
-								color: '#4A5661',
+								color: this.props.axesColor,
+								zeroLineColor: this.props.pointColor,
+								tickMarkLength: 0,
 							},
 							ticks: {
 								min: 0,
 								max: 1000,
 								stepSize: 250,
+								padding: 10,
 								callback: function (label, index, labels) {
 									switch (label) {
 										case 0:
@@ -80,8 +86,11 @@ class GraphContainer extends Component {
 					xAxes: [
 						{
 							gridLines: {
+								drawBorder: false,
 								display: true,
-								color: '#4A5661',
+								color: this.props.axesColor,
+								zeroLineColor: this.props.pointColor,
+								tickMarkLength: 0,
 							},
 						},
 					],
@@ -91,6 +100,10 @@ class GraphContainer extends Component {
 	};
 
 	componentDidMount() {
+		this.drawCharts();
+	}
+
+	componentDidUpdate() {
 		this.drawCharts();
 	}
 
