@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import GraphContainer from '../../template/graphContainer/GraphContainer';
-
 import UIGraphicOne from '../../assets/araboard-UI-graphic.png';
-
 import './AntMetrics.css';
+import { useAntMetrics } from '../../hooks/useAntMetrics';
+import { LoadingShield } from '../loadingShield/loadingShield';
+import { PriceFormat } from '../priceFormat/priceFormat';
 
 export function AntMetrics() {
-  const context = useContext(ThemeContext);
-  const { isLight, lightTheme, darkTheme } = context;
+  const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
+  const antMetrics = useAntMetrics();
+
   const theme = isLight ? lightTheme : darkTheme;
   return (
     <div className="component-container">
@@ -32,15 +34,36 @@ export function AntMetrics() {
         <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
           <div className="individual-stats">
             <h5 style={{ color: theme.antMetricStatsTitle }}>Price</h5>
-            <h4 style={{ color: theme.metricNumbers }}>$1.00</h4>
+            <h4 style={{ color: theme.metricNumbers }}>
+              <LoadingShield
+                loading={antMetrics.loading}
+                error={antMetrics.error}
+                component={PriceFormat}
+                props={{ number: antMetrics.metrics?.price, format: '$0,0.00' }}
+              />
+            </h4>
           </div>
           <div className="individual-stats">
             <h5 style={{ color: theme.antMetricStatsTitle }}>Supply</h5>
-            <h4 style={{ color: theme.metricNumbers }}>39m</h4>
+            <h4 style={{ color: theme.metricNumbers }}>
+              <LoadingShield
+                loading={antMetrics.loading}
+                error={antMetrics.error}
+                component={PriceFormat}
+                props={{ number: antMetrics.metrics?.supply, format: '0.0a' }}
+              />
+            </h4>
           </div>
           <div className="individual-stats">
             <h5 style={{ color: theme.antMetricStatsTitle }}>Mkt Cap</h5>
-            <h4 style={{ color: theme.metricNumbers }}>$35m</h4>
+            <h4 style={{ color: theme.metricNumbers }}>
+              <LoadingShield
+                loading={antMetrics.loading}
+                error={antMetrics.error}
+                component={PriceFormat}
+                props={{ number: antMetrics.metrics?.marketCap, format: '$0.0.0a' }}
+              />
+            </h4>
           </div>
           <div className="individual-stats">
             <h5 style={{ color: theme.antMetricStatsTitle }}>Staked</h5>
@@ -73,5 +96,3 @@ export function AntMetrics() {
     </div>
   );
 }
-
-export default AntMetrics;
