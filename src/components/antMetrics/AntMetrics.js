@@ -6,10 +6,13 @@ import './AntMetrics.css';
 import { useAntMetrics } from '../../hooks/useAntMetrics';
 import { LoadingShield } from '../loadingShield/loadingShield';
 import { PriceFormat } from '../priceFormat/priceFormat';
+import { useAntStaking } from '../../hooks/useAntStaking';
+import { StakingFormat } from '../stakingFormat/stakingFormat';
 
 export function AntMetrics() {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const antMetrics = useAntMetrics();
+  const antStaking = useAntStaking();
 
   const theme = isLight ? lightTheme : darkTheme;
   return (
@@ -61,13 +64,20 @@ export function AntMetrics() {
                 loading={antMetrics.loading}
                 error={antMetrics.error}
                 component={PriceFormat}
-                props={{ number: antMetrics.metrics?.marketCap, format: '$0.0.0a' }}
+                props={{ number: antMetrics.metrics?.marketCap, format: '$0.0a' }}
               />
             </h4>
           </div>
           <div className="individual-stats">
             <h5 style={{ color: theme.antMetricStatsTitle }}>Staked</h5>
-            <h4 style={{ color: theme.metricNumbers }}>3% ($1m)</h4>
+            <h4 style={{ color: theme.metricNumbers }}>
+              <LoadingShield
+                loading={antMetrics.loading || antStaking.loading}
+                error={antStaking.error || antMetrics.error}
+                component={StakingFormat}
+                props={{ staked: antStaking.value, supply: antMetrics.metrics?.supply }}
+              />
+            </h4>
           </div>
         </div>
       </div>
