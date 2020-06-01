@@ -1,12 +1,15 @@
 import React, { Component, useEffect } from 'react';
 import Chart from 'chart.js';
+import * as _ from 'lodash'
 
 import './GraphContainer.css';
 
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
 export function GraphContainer(props) {
-  const { title, pointColor, axesColor, metricTitle, metric, metricNumber } = props;
+  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data } = props;
+  const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
+  const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
   const drawCharts = () => {
     let ctx = '';
@@ -15,13 +18,13 @@ export function GraphContainer(props) {
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['', '', '', '', '', '', '', '', '', ''],
+        labels: labels,
 
         datasets: [
           {
             label: '',
-            data: [100, 200, 300, 400, 350, 500, 450, 550, 650, 600],
-            pointBorderWidth: 6,
+            data: points,
+            pointBorderWidth: 2,
             pointBackgroundColor: pointColor,
             borderColor: pointColor,
             borderWidth: 2,
@@ -35,7 +38,7 @@ export function GraphContainer(props) {
           display: false,
         },
         tooltips: {
-          enabled: false,
+          enabled: true,
         },
         maintainAspectRatio: false,
 
@@ -51,21 +54,21 @@ export function GraphContainer(props) {
                 tickMarkLength: 0,
               },
               ticks: {
-                min: 0,
-                max: 1000,
-                stepSize: 250,
+                min: _.min(points) * 0.8,
+                max: _.max(points) * 1.2,
+                stepSize: 5000,
                 padding: 10,
                 callback: function (label, index, labels) {
                   switch (label) {
                     case 0:
                       return '0';
-                    case 250:
+                    case 10000:
                       return '10K';
-                    case 500:
+                    case 20000:
                       return '20K';
-                    case 750:
+                    case 30000:
                       return '30k';
-                    case 1000:
+                    case 40000:
                       return '40k';
                     default:
                       return '';
