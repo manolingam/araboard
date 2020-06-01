@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import GraphContainer from '../../template/graphContainer/GraphContainer';
+import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 
 export function AragonDaoChart() {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
