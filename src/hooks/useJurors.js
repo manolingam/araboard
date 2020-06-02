@@ -51,7 +51,7 @@ export function useJurors() {
           });
         });
     }
-  }, [lastBlockNumber, web3.eth]);
+  }, [lastBlockNumber, web3.eth, state.error]);
 
   const fetchJurors = useCallback(() => {
     if (lastBlockNumber && !state.error) {
@@ -81,7 +81,7 @@ export function useJurors() {
           });
         });
     }
-  });
+  }, [lastBlockNumber, state.error]);
 
   useEffect(() => {
     fetchLastBlockNumber();
@@ -89,7 +89,7 @@ export function useJurors() {
 
   useEffect(() => {
     fetchJurors();
-  }, [lastBlockNumber]);
+  }, [fetchJurors, lastBlockNumber]);
 
   return state;
 }
