@@ -9,7 +9,7 @@ const SUBGRAPH_ENDPOINT = 'https://api.thegraph.com/subgraphs/name/aragon/aragon
 const graphQLClient = new GraphQLClient(SUBGRAPH_ENDPOINT);
 
 const BLOCKS_PER_DAY = (24 * 60 * 60) / 15;
-const SPACES = 10;
+const SPACES = 11;
 const DAYS_PER_SPACE = 3;
 const ANJ_DECIMALS = 18; // To query blockchain for this as well is too much
 
