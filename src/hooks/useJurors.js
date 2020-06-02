@@ -14,6 +14,7 @@ function GET_JURORS(blockNumber) {
   return `query GetJurors {
     jurors(first: 1000, where: {activeBalance_gt: 0}, block: {number: ${blockNumber}}) {
       id
+      activeBalance
     }
   }`;
 }
@@ -61,7 +62,7 @@ export function useJurors() {
         const jurorsLength = data.jurors.length;
         return {
           timestamp: block.day,
-          value: jurorsLength,
+          jurorsCount: jurorsLength,
         };
       });
       Promise.all(promises)

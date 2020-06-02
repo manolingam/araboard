@@ -1,13 +1,12 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { useJurors } from "../../hooks/useJurors";
 import numeral from "numeral";
 
-export function JurorsChart() {
+export function JurorsChart(props) {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const jurors = useJurors()
+  const jurors = props.jurors
 
   if (jurors.loading) {
     return <>...</>
@@ -17,7 +16,7 @@ export function JurorsChart() {
   } else {
     const timeseries = jurors.data.map(point => {
       return {
-        value: point.value,
+        value: point.jurorsCount,
         label: point.timestamp.toLocaleString({ month: 'long', day: '2-digit' })
       }
     })
