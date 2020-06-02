@@ -9,7 +9,8 @@ const SUBGRAPH_ENDPOINT = 'https://api.thegraph.com/subgraphs/name/aragon/aragon
 const graphQLClient = new GraphQLClient(SUBGRAPH_ENDPOINT);
 
 const BLOCKS_PER_DAY = (24 * 60 * 60) / 15;
-const DAYS = 30;
+const SPACES = 10;
+const DAYS_PER_SPACE = 3;
 const ANJ_DECIMALS = 18; // To query blockchain for this as well is too much
 
 function GET_JURORS(blockNumber) {
@@ -27,9 +28,9 @@ function GET_JURORS(blockNumber) {
 const today = DateTime.local();
 
 function blockNumbers(lastBlockNumber) {
-  return _.times(DAYS).map((shift) => {
-    const blockNumber = lastBlockNumber - shift * BLOCKS_PER_DAY;
-    const day = today.minus({ day: shift });
+  return _.times(SPACES).map((shift) => {
+    const blockNumber = lastBlockNumber - (shift * DAYS_PER_SPACE) * BLOCKS_PER_DAY;
+    const day = today.minus({ day: shift * DAYS_PER_SPACE });
     return {
       blockNumber,
       day,
