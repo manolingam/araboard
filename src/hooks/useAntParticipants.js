@@ -3,9 +3,11 @@ import * as _ from 'lodash';
 import { GraphQLClient } from 'graphql-request';
 import { DateTime } from 'luxon';
 
+const PAGE = 1000
+
 function GET_STATS(skip = 0) {
   return `query GetStats {
-    stats(orderBy: timestamp, orderDirection: desc, skip: ${skip}) {
+    stats(first: ${PAGE}, orderBy: timestamp, orderDirection: desc, skip: ${skip}) {
       id
       holders
       block
@@ -31,7 +33,7 @@ async function loadMonth(skip = 0, stats = []) {
           const value = Number(stat.holders);
           return { timestamp, value };
     })
-    return loadMonth(skip + 100, nextStats.concat(...stats))
+    return loadMonth(skip + PAGE, nextStats.concat(...stats))
   }
 }
 
