@@ -6,10 +6,11 @@ export const EthereumProviderContext = createContext(null);
 
 export function EthereumEndpointProvider(props) {
   const provider = new Web3.providers.WebsocketProvider('wss://mainnet.eth.aragon.network/ws')
+  const web3 = new Web3(provider)
   Web3EthContract.setProvider(provider);
 
   return (
-    <EthereumProviderContext.Provider value={provider}>
+    <EthereumProviderContext.Provider value={web3}>
       {props.children}
     </EthereumProviderContext.Provider>
   );
