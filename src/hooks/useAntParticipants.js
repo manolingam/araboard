@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as _ from 'lodash';
 import { GraphQLClient } from 'graphql-request';
 import { DateTime } from 'luxon';
@@ -76,7 +76,7 @@ export function useAntParticipants() {
           data: null
         })
       });
-  }, [loadMonth]);
+  }, []);
 
   return state
 }

@@ -1,6 +1,6 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'chart.js';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 
 import './GraphContainer.css';
 
@@ -11,7 +11,7 @@ export function GraphContainer(props) {
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
-  const drawCharts = () => {
+  const drawCharts = React.useCallback(() => {
     let ctx = '';
     ctx = document.getElementById(title).getContext('2d');
 
@@ -91,11 +91,11 @@ export function GraphContainer(props) {
         },
       },
     });
-  };
+  }, [axesColor, labels, pointColor, points, title]);
 
   useEffect(() => {
     drawCharts();
-  }, []);
+  }, [drawCharts]);
 
   return (
     <div className="graph-container">

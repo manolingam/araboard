@@ -37,15 +37,16 @@ const TOKEN_BALANCE_OF_ABI = [
   },
 ];
 
+
 export function useAntStaking() {
-  const ant = new Web3EthContract(TOKEN_BALANCE_OF_ABI, ANT_ADDR_MAINNET);
+  const AntTokenContract = new Web3EthContract(TOKEN_BALANCE_OF_ABI, ANT_ADDR_MAINNET);
   const [error, setError] = useState(null);
   const [agent, setAgent] = useState(null);
   const [vault, setVault] = useState(null);
   const [decimals, setDecimals] = useState(0);
 
   useEffect(() => {
-    ant.methods
+    AntTokenContract.methods
       .decimals()
       .call()
       .then((decimals) => {
@@ -57,7 +58,7 @@ export function useAntStaking() {
   }, []);
 
   useEffect(() => {
-    ant.methods
+    AntTokenContract.methods
       .balanceOf(NETWORK_AGENT_ADDR)
       .call()
       .then((ant) => {
@@ -67,7 +68,7 @@ export function useAntStaking() {
   }, []);
 
   useEffect(() => {
-    ant.methods
+    AntTokenContract.methods
       .balanceOf(NETWORK_RESERVE_ADDR)
       .call()
       .then((ant) => {
