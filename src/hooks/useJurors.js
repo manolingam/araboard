@@ -10,8 +10,6 @@ const graphQLClient = new GraphQLClient(SUBGRAPH_ENDPOINT);
 const BLOCKS_PER_DAY = (24 * 60 * 60) / 15;
 const DAYS = 30;
 
-// jurors(first: 1000, where: {activeBalance_gt: 0}, block: {number: ${blockNumber}) {
-
 function GET_JURORS(blockNumber) {
   return `query GetJurors {
     jurors(first: 1000, where: {activeBalance_gt: 0}, block: {number: ${blockNumber}}) {
