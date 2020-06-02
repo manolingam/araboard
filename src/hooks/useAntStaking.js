@@ -38,8 +38,6 @@ const TOKEN_BALANCE_OF_ABI = [
 ];
 
 export function useAntStaking() {
-  Web3EthContract.setProvider('wss://mainnet.eth.aragon.network/ws');
-
   const ant = new Web3EthContract(TOKEN_BALANCE_OF_ABI, ANT_ADDR_MAINNET);
   const [error, setError] = useState(null);
   const [agent, setAgent] = useState(null);
