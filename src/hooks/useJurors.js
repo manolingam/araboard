@@ -14,9 +14,12 @@ const ANJ_DECIMALS = 18; // To query blockchain for this as well is too much
 
 function GET_JURORS(blockNumber) {
   return `query GetJurors {
-    jurors(first: 1000, where: {activeBalance_gt: 0}, block: {number: ${blockNumber}}) {
+    jurors(first: 1000, block: {number: ${blockNumber}}) {
       id
       activeBalance
+      availableBalance
+      lockedBalance
+      deactivationBalance
     }
   }`;
 }
@@ -61,14 +64,24 @@ export function useJurors() {
       const blocks = blockNumbers(lastBlockNumber);
       const promises = blocks.map(async (block) => {
         const data = await graphQLClient.request(GET_JURORS(block.blockNumber));
-        const activeBalance = _.sumBy(data.jurors, (point) =>
-          new BigNumber(point.activeBalance).div(10 ** ANJ_DECIMALS).toNumber(),
-        );
-        const jurorsLength = data.jurors.length;
+        const activeBalance = _.sumBy(data.jurors, (point) => {
+          const active = new BigNumber(point.activeBalance).div(10 ** ANJ_DECIMALS).toNumber();
+          const available = new BigNumber(point.availableBalance).div(10 ** ANJ_DECIMALS).toNumber();
+          const locked = new BigNumber(point.lockedBalance).div(10 ** ANJ_DECIMALS).toNumber();
+          const deactivation = new BigNumber(point.deactivationBalance).div(10 ** ANJ_DECIMALS).toNumber();
+          return active + available + locked + deactivation;
+        });
+        const jurorsLength = _.sumBy(data.jurors, (point) => {
+          if (new BigNumber(point.activeBalance).gt(0)) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
         return {
           timestamp: block.day,
           jurorsCount: jurorsLength,
-          activeBalance: activeBalance
+          activeBalance: activeBalance,
         };
       });
       Promise.all(promises)
