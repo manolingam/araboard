@@ -1,16 +1,14 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { EthereumProviderContext } from '../context/EthereumProviderContext';
+import { useCallback, useEffect, useState } from 'react';
 import * as _ from 'lodash';
 import { GraphQLClient } from 'graphql-request';
 import { DateTime } from 'luxon';
 import BigNumber from 'bignumber.js';
+import { blockNumbers } from './blockNumbers.util';
+import { useLastBlockNumber } from './useLastBlockNumber';
 
 const SUBGRAPH_ENDPOINT = 'https://api.thegraph.com/subgraphs/name/aragon/aragon-court';
 const graphQLClient = new GraphQLClient(SUBGRAPH_ENDPOINT);
 
-const BLOCKS_PER_DAY = (24 * 60 * 60) / 15;
-const SPACES = 11;
-const DAYS_PER_SPACE = 3;
 const ANJ_DECIMALS = 18; // To query blockchain for this as well is too much
 
 function GET_JURORS(blockNumber) {
@@ -27,42 +25,13 @@ function GET_JURORS(blockNumber) {
 
 const today = DateTime.local();
 
-function blockNumbers(lastBlockNumber) {
-  return _.times(SPACES).map((shift) => {
-    const blockNumber = lastBlockNumber - (shift * DAYS_PER_SPACE) * BLOCKS_PER_DAY;
-    const day = today.minus({ day: shift * DAYS_PER_SPACE });
-    return {
-      blockNumber,
-      day,
-    };
-  });
-}
-
 export function useJurors() {
-  const web3 = useContext(EthereumProviderContext);
-  const [lastBlockNumber, setLastBlockNumber] = useState(null);
+  const lastBlockNumber = useLastBlockNumber();
   const [state, setState] = useState({ loading: true, error: null, data: null });
-
-  const fetchLastBlockNumber = useCallback(() => {
-    if (!lastBlockNumber && !state.error) {
-      web3.eth
-        .getBlockNumber()
-        .then((num) => {
-          setLastBlockNumber(num - 100); // To adjust for lagging Graph indexer
-        })
-        .catch((error) => {
-          setState({
-            loading: false,
-            error: error,
-            data: null,
-          });
-        });
-    }
-  }, [lastBlockNumber, web3.eth, state.error]);
 
   const fetchJurors = useCallback(() => {
     if (lastBlockNumber && !state.error) {
-      const blocks = blockNumbers(lastBlockNumber);
+      const blocks = blockNumbers(today, lastBlockNumber);
       const promises = blocks.map(async (block) => {
         const data = await graphQLClient.request(GET_JURORS(block.blockNumber));
         const activeBalance = _.sumBy(data.jurors, (point) => {
@@ -103,10 +72,6 @@ export function useJurors() {
         });
     }
   }, [lastBlockNumber, state.error]);
-
-  useEffect(() => {
-    fetchLastBlockNumber();
-  });
 
   useEffect(() => {
     fetchJurors();

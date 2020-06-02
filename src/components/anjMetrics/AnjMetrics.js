@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import { AragonCourtMetrics } from '../aragonCourtMetrics/AragonCourtMetrics';
+import { AnjSupplyChart } from '../anjSupplyChart/AnjSupplyChart';
 import UIGraphicTwo from '../../assets/araboard-UI-graphic2.png';
 
 import './AnjMetrics.css';
@@ -37,14 +38,7 @@ export function AnjMetrics() {
             pointColor={theme.firstInSeriesPoint}
             axesColor={theme.axesGridLines}
           />
-          <GraphContainer
-            title="Supply"
-            metric="40m"
-            metricTitle={theme.secondInSeries}
-            metricNumber={theme.metricNumbers}
-            pointColor={theme.secondInSeriesPoint}
-            axesColor={theme.axesGridLines}
-          />
+          <AnjSupplyChart />
           <GraphContainer
             title="Network Val."
             metric="1.3m"
