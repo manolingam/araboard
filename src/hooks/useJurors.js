@@ -3,12 +3,14 @@ import { EthereumProviderContext } from '../context/EthereumProviderContext';
 import * as _ from 'lodash';
 import { GraphQLClient } from 'graphql-request';
 import { DateTime } from 'luxon';
+import BigNumber from 'bignumber.js';
 
 const SUBGRAPH_ENDPOINT = 'https://api.thegraph.com/subgraphs/name/aragon/aragon-court';
 const graphQLClient = new GraphQLClient(SUBGRAPH_ENDPOINT);
 
 const BLOCKS_PER_DAY = (24 * 60 * 60) / 15;
 const DAYS = 30;
+const ANJ_DECIMALS = 18; // To query blockchain for this as well is too much
 
 function GET_JURORS(blockNumber) {
   return `query GetJurors {
@@ -59,10 +61,14 @@ export function useJurors() {
       const blocks = blockNumbers(lastBlockNumber);
       const promises = blocks.map(async (block) => {
         const data = await graphQLClient.request(GET_JURORS(block.blockNumber));
+        const activeBalance = _.sumBy(data.jurors, (point) =>
+          new BigNumber(point.activeBalance).div(10 ** ANJ_DECIMALS).toNumber(),
+        );
         const jurorsLength = data.jurors.length;
         return {
           timestamp: block.day,
           jurorsCount: jurorsLength,
+          activeBalance: activeBalance
         };
       });
       Promise.all(promises)
