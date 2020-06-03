@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
-import { useLastBlockNumber } from './useLastBlockNumber';
 import { blockNumbers } from './blockNumbers.util';
 import BigNumber from 'bignumber.js';
 const Web3EthContract = require('web3-eth-contract');
@@ -21,10 +20,10 @@ const DECIMALS = 18;
 
 const today = DateTime.local();
 
-export function useAnjSupply() {
-  const lastBlockNumber = useLastBlockNumber();
+export function useAnjSupply(lastBlockNumber) {
   const AnjTokenContract = new Web3EthContract(ABI, ANJ_ADDR_MAINNET);
   const [state, setState] = useState({ loading: true, error: null, data: null });
+
 
   const fetchSupply = useCallback(() => {
     if (lastBlockNumber) {
@@ -50,7 +49,7 @@ export function useAnjSupply() {
 
   useEffect(() => {
     fetchSupply();
-  }, [lastBlockNumber]);
+  }, [lastBlockNumber, fetchSupply]);
 
   return state;
 }

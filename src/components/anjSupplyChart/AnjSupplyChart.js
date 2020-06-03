@@ -4,10 +4,11 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { useAnjSupply } from '../../hooks/useAnjSupply';
 import numeral from 'numeral';
 
-export function AnjSupplyChart() {
+export function AnjSupplyChart(props) {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const anjSupply = useAnjSupply();
+  const lastBlockNumber = props.lastBlockNumber
+  const anjSupply = useAnjSupply(lastBlockNumber);
 
   if (anjSupply.loading) {
     return <>...</>;
