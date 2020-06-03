@@ -10,7 +10,14 @@ export function AnjSupplyChart(props) {
   const anjSupply = props.anjSupply
 
   if (anjSupply.loading) {
-    return <>...</>;
+    return (
+      <div className='spinner-container'>
+        <div className="spinner">
+          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
+          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
+        </div>
+      </div>
+    )
   } else if (anjSupply.error) {
     return <>X_X</>;
   } else {

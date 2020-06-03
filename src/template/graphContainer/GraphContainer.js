@@ -11,7 +11,18 @@ export function GraphContainer(props) {
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
+  var removedPoints = points.splice(0,3) // removed last 3 elements
+  var removedLabels = labels.splice(0,3) // removed last 3 elements
+
+  // function to format big numbers in 2K, 320K, etc.
+  const kFormatter = (num) => {
+    return Math.abs(num) > 1000000 ? Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+  }
+
   const drawCharts = React.useCallback(() => {
+
+    let plotPointGap = (_.max(points) - _.min(points)) / 3 // the step gap for each point
+
     let ctx = '';
     ctx = document.getElementById(title).getContext('2d');
 
@@ -54,24 +65,15 @@ export function GraphContainer(props) {
                 tickMarkLength: 0,
               },
               ticks: {
-                min: _.min(points) * 0.8,
-                max: _.max(points) * 1.2,
-                stepSize: 5000,
+                min: _.min(points) - plotPointGap,
+                // max: _.max(points) + plotPointGap,
+                stepSize: plotPointGap,
                 padding: 10,
+  
                 callback: function (label, index, labels) {
                   switch (label) {
-                    case 0:
-                      return '0';
-                    case 10000:
-                      return '10K';
-                    case 20000:
-                      return '20K';
-                    case 30000:
-                      return '30k';
-                    case 40000:
-                      return '40k';
                     default:
-                      return '';
+                      return kFormatter(label.toFixed(3));
                   }
                 },
               },

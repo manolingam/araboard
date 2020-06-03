@@ -10,7 +10,14 @@ export function AnjActivatedChart(props) {
   const jurors = props.jurors;
 
   if (jurors.loading) {
-    return <>...</>;
+    return (
+      <div className='spinner-container'>
+        <div className="spinner">
+          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
+          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
+        </div>
+      </div>
+    )
   } else if (jurors.error) {
     console.error(jurors.error);
     return <>X_X</>;
