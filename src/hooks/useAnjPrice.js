@@ -110,7 +110,7 @@ export function useAnjPrice(anjSupply) {
           .call();
         const anjTotalSupply = point.value;
         const anjInAt = await bancorFormula.methods
-          .calculatePurchaseReturn(anjTotalSupply, antTreasuryBalance, MAINNET_CONNECTOR_WEIGHT, ONE_TOKEN.toString())
+          .calculateSaleReturn(anjTotalSupply, antTreasuryBalance, MAINNET_CONNECTOR_WEIGHT, ONE_TOKEN.toString())
           .call();
         return {
           ...point,

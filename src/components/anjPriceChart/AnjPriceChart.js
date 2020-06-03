@@ -1,13 +1,12 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import React, { useContext, useMemo } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { useAnjPrice } from '../../hooks/useAnjPrice';
 import numeral from 'numeral';
 
 export function AnjPriceChart(props) {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const anjPrice = useAnjPrice(props.anjSupply);
+  const anjPrice = props.anjPrice;
 
   const timeseries = useMemo(() => {
     if (anjPrice.data) {
@@ -23,7 +22,7 @@ export function AnjPriceChart(props) {
   const lastPointFormatted = useMemo(() => {
     if (timeseries) {
       const lastPoint = timeseries[timeseries.length - 1].value;
-      return numeral(lastPoint).format('$0.0a');
+      return numeral(lastPoint).format('$0.000a');
     }
   }, [timeseries]);
 

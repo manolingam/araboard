@@ -1,21 +1,22 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import { AragonCourtMetrics } from '../aragonCourtMetrics/AragonCourtMetrics';
 import { AnjSupplyChart } from '../anjSupplyChart/AnjSupplyChart';
 import UIGraphicTwo from '../../assets/araboard-UI-graphic2.png';
 
 import './AnjMetrics.css';
 import { useLastBlockNumber } from '../../hooks/useLastBlockNumber';
-import { AnjPriceChart } from "../anjPriceChart/AnjPriceChart";
-import { useAnjSupply } from "../../hooks/useAnjSupply";
-import { AnjNetworkValueChart } from "../anjNetworkValueChart/anjNetworkValueChart";
+import { AnjPriceChart } from '../anjPriceChart/AnjPriceChart';
+import { useAnjSupply } from '../../hooks/useAnjSupply';
+import { AnjNetworkValueChart } from '../anjNetworkValueChart/anjNetworkValueChart';
+import { useAnjPrice } from '../../hooks/useAnjPrice';
 
 export function AnjMetrics() {
   const lastBlockNumber = useLastBlockNumber();
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
   const anjSupply = useAnjSupply(lastBlockNumber);
+  const anjPrice = useAnjPrice(anjSupply);
 
   return (
     <div className="component-container">
@@ -36,9 +37,9 @@ export function AnjMetrics() {
           <h6 style={{ color: theme.metricBoxHelper }}>Read more</h6>
         </div>
         <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
-          <AnjPriceChart anjSupply={anjSupply}/>
+          <AnjPriceChart anjPrice={anjPrice} />
           <AnjSupplyChart anjSupply={anjSupply} lastBlockNumber={lastBlockNumber} />
-          <AnjNetworkValueChart/>
+          <AnjNetworkValueChart anjSupply={anjSupply} anjPrice={anjPrice} />
         </div>
       </div>
     </div>
