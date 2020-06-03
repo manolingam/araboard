@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import { ThemeContext } from '../../context/ThemeContext';
-import { useAnjSupply } from '../../hooks/useAnjSupply';
 import numeral from 'numeral';
+import BigNumber from "bignumber.js";
 
-export function AnjSupplyChart() {
+export function AnjSupplyChart(props) {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const anjSupply = useAnjSupply();
+  const anjSupply = props.anjSupply
 
   if (anjSupply.loading) {
     return <>...</>;
@@ -16,7 +16,7 @@ export function AnjSupplyChart() {
   } else {
     const timeseries = anjSupply.data.map((point) => {
       return {
-        value: point.value,
+        value: Math.round(new BigNumber(point.value).dividedBy(10 ** 18).toNumber()),
         label: point.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
       };
     });
