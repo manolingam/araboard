@@ -11,9 +11,9 @@ export function LoadingShield(props) {
 
   if (loading) {
     return (
-    <div class="spinner">
-      <div class="double-bounce1" style={{backgroundColor: theme.metricNumbers}}></div>
-      <div class="double-bounce2" style={{backgroundColor: theme.metricNumbers}}></div>
+    <div className="spinner">
+      <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
+      <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
     </div>
     )
   } else if (error) {

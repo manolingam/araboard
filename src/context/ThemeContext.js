@@ -2,7 +2,7 @@ import React, { Component, createContext } from 'react';
 
 export const ThemeContext = createContext();
 
-class ThemeContextProvider extends Component {
+export class ThemeContextProvider extends Component {
 	state = {
 		isLight: false,
 		darkTheme: {
@@ -59,5 +59,3 @@ class ThemeContextProvider extends Component {
 		);
 	}
 }
-
-export default ThemeContextProvider;
