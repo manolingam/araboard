@@ -8,11 +8,13 @@ import UIGraphicTwo from '../../assets/araboard-UI-graphic2.png';
 import './AnjMetrics.css';
 import { useLastBlockNumber } from '../../hooks/useLastBlockNumber';
 import { AnjPriceChart } from "../anjPriceChart/AnjPriceChart";
+import { useAnjSupply } from "../../hooks/useAnjSupply";
 
 export function AnjMetrics() {
   const lastBlockNumber = useLastBlockNumber();
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
+  const anjSupply = useAnjSupply(lastBlockNumber);
 
   return (
     <div className="component-container">
@@ -33,8 +35,8 @@ export function AnjMetrics() {
           <h6 style={{ color: theme.metricBoxHelper }}>Read more</h6>
         </div>
         <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
-          <AnjPriceChart/>
-          <AnjSupplyChart lastBlockNumber={lastBlockNumber} />
+          <AnjPriceChart anjSupply={anjSupply}/>
+          <AnjSupplyChart anjSupply={anjSupply} lastBlockNumber={lastBlockNumber} />
           <GraphContainer
             title="Network Val."
             metric="1.3m"

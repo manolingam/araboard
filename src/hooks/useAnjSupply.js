@@ -30,7 +30,7 @@ export function useAnjSupply(lastBlockNumber) {
       const blocks = blockNumbers(today, lastBlockNumber);
       const promises = blocks.map(async (point) => {
         const response = await AnjTokenContract.methods.totalSupplyAt(point.blockNumber).call();
-        const totalSupply = new BigNumber(response).div(10 ** DECIMALS).toNumber();
+        const totalSupply = response;
         return {
           ...point,
           timestamp: point.day,
