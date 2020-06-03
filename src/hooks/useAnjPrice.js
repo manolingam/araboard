@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useAntPrice } from "./useAntPrice";
+import BigNumber from "bignumber.js";
 
 const Web3EthContract = require('web3-eth-contract');
 
@@ -88,11 +90,15 @@ const BANCOR_FORMULA_ABI = [
   },
 ];
 
+/**
+ * In USD
+ */
 export function useAnjPrice(anjSupply) {
   const [state, setState] = useState({ loading: true, error: null, data: null });
+  const antPrice = useAntPrice()
 
   const fetchPriceTimeseries = useCallback(() => {
-    if (anjSupply.data) {
+    if (anjSupply.data && antPrice.data) {
       const supply = anjSupply.data;
       const antToken = new Web3EthContract(ANT_TOKEN_ABI, ANT_TOKEN_ADDRESS);
       const bancorFormula = new Web3EthContract(BANCOR_FORMULA_ABI, BANCOR_FORMULA_ADDRESS);
@@ -114,10 +120,21 @@ export function useAnjPrice(anjSupply) {
       });
       Promise.all(priceTimeseriesP)
         .then((timeseries) => {
+          const inUSD = timeseries.map(point => {
+            const startOfDay = point.timestamp.startOf('day')
+            const found = antPrice.data.find(a => a.timestamp.valueOf() === startOfDay.valueOf())
+            const antInUsd = found.value
+            const anjInAnt = new BigNumber(point.value).div(10 ** 18)
+            const anjInUsd = anjInAnt.toNumber() * antInUsd
+            return {
+              timestamp: point.timestamp.startOf('day'),
+              value: anjInUsd
+            }
+          })
           setState({
             loading: false,
             error: null,
-            data: timeseries,
+            data: inUSD,
           });
         })
         .catch((error) => {
@@ -128,7 +145,7 @@ export function useAnjPrice(anjSupply) {
           });
         });
     }
-  }, [anjSupply.data]);
+  }, [anjSupply.data, antPrice.data]);
 
   useEffect(() => {
     fetchPriceTimeseries();
