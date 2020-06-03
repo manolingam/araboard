@@ -9,6 +9,7 @@ import './AnjMetrics.css';
 import { useLastBlockNumber } from '../../hooks/useLastBlockNumber';
 import { AnjPriceChart } from "../anjPriceChart/AnjPriceChart";
 import { useAnjSupply } from "../../hooks/useAnjSupply";
+import { AnjNetworkValueChart } from "../anjNetworkValueChart/anjNetworkValueChart";
 
 export function AnjMetrics() {
   const lastBlockNumber = useLastBlockNumber();
@@ -37,14 +38,7 @@ export function AnjMetrics() {
         <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
           <AnjPriceChart anjSupply={anjSupply}/>
           <AnjSupplyChart anjSupply={anjSupply} lastBlockNumber={lastBlockNumber} />
-          <GraphContainer
-            title="Network Val."
-            metric="1.3m"
-            metricTitle={theme.thirdInSeries}
-            metricNumber={theme.metricNumbers}
-            pointColor={theme.thirdInSeriesPoint}
-            axesColor={theme.axesGridLines}
-          />
+          <AnjNetworkValueChart/>
         </div>
       </div>
     </div>

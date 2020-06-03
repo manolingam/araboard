@@ -2,7 +2,6 @@ import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import React, { useContext, useMemo } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { useAnjPrice } from '../../hooks/useAnjPrice';
-import BigNumber from 'bignumber.js';
 import numeral from 'numeral';
 
 export function AnjPriceChart(props) {
