@@ -3,6 +3,7 @@
 	flex-direction: row;
 	align-items: center;
 	margin: 15px;
+	min-height: 250px;
 }
 
 .graph-container .stats {

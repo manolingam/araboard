@@ -1,134 +1,115 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'chart.js';
+import * as _ from 'lodash';
 
 import './GraphContainer.css';
 
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
-class GraphContainer extends Component {
-	drawCharts = () => {
-		let ctx = '';
-		ctx = document.getElementById(this.props.title).getContext('2d');
+export function GraphContainer(props) {
+  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data } = props;
+  const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
+  const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
-		new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: ['', '', '', '', '', '', '', '', '', ''],
+  var removedPoints = points.splice(0,3) // removed last 3 elements
+  var removedLabels = labels.splice(0,3) // removed last 3 elements
 
-				datasets: [
-					{
-						label: '',
-						data: [
-							100,
-							200,
-							300,
-							400,
-							350,
-							500,
-							450,
-							550,
-							650,
-							600,
-						],
-						pointBorderWidth: 6,
-						pointBackgroundColor: this.props.pointColor,
-						borderColor: this.props.pointColor,
-						borderWidth: 2,
-						borderDash: [7, 5],
-						backgroundColor: 'transparent',
-					},
-				],
-			},
-			options: {
-				legend: {
-					display: false,
-				},
-				tooltips: {
-					enabled: false,
-				},
-				maintainAspectRatio: false,
+  // function to format big numbers in 2K, 320K, etc.
+  const kFormatter = (num) => {
+    return Math.abs(num) > 1000000 ? Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+  }
 
-				scales: {
-					yAxes: [
-						{
-							stacked: true,
-							gridLines: {
-								drawBorder: false,
-								display: true,
-								color: this.props.axesColor,
-								zeroLineColor: this.props.pointColor,
-								tickMarkLength: 0,
-							},
-							ticks: {
-								min: 0,
-								max: 1000,
-								stepSize: 250,
-								padding: 10,
-								callback: function (label, index, labels) {
-									switch (label) {
-										case 0:
-											return '0';
-										case 250:
-											return '10K';
-										case 500:
-											return '20K';
-										case 750:
-											return '30k';
-										case 1000:
-											return '40k';
-										default:
-											return '';
-									}
-								},
-							},
-						},
-					],
-					xAxes: [
-						{
-							gridLines: {
-								drawBorder: false,
-								display: true,
-								color: this.props.axesColor,
-								zeroLineColor: this.props.pointColor,
-								tickMarkLength: 0,
-							},
-						},
-					],
-				},
-			},
-		});
-	};
+  const drawCharts = React.useCallback(() => {
 
-	componentDidMount() {
-		this.drawCharts();
-	}
+    let plotPointGap = (_.max(points) - _.min(points)) / 3 // the step gap for each point
 
-	componentDidUpdate() {
-		this.drawCharts();
-	}
+    let ctx = '';
+    ctx = document.getElementById(title).getContext('2d');
 
-	render() {
-		return (
-			<div className='graph-container'>
-				<div className='stats'>
-					<h5 style={{ color: this.props.metricTitle }}>
-						{this.props.title}
-					</h5>
-					<h4 style={{ color: this.props.metricNumber }}>
-						{this.props.metric}
-					</h4>
-				</div>
-				<div className='graph'>
-					<div className='chart-container'>
-						<canvas
-							id={this.props.title}
-							style={{ maxWidth: '100%' }}
-						></canvas>
-					</div>
-				</div>
-			</div>
-		);
-	}
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+
+        datasets: [
+          {
+            label: '',
+            data: points,
+            pointBorderWidth: 2,
+            pointBackgroundColor: pointColor,
+            borderColor: pointColor,
+            borderWidth: 2,
+            borderDash: [7, 5],
+            backgroundColor: 'transparent',
+          },
+        ],
+      },
+      options: {
+        legend: {
+          display: false,
+        },
+        tooltips: {
+          enabled: true,
+        },
+        maintainAspectRatio: false,
+
+        scales: {
+          yAxes: [
+            {
+              stacked: true,
+              gridLines: {
+                drawBorder: false,
+                display: true,
+                color: axesColor,
+                zeroLineColor: pointColor,
+                tickMarkLength: 0,
+              },
+              ticks: {
+                min: _.min(points) - plotPointGap,
+                // max: _.max(points) + plotPointGap,
+                stepSize: plotPointGap,
+                padding: 10,
+  
+                callback: function (label, index, labels) {
+                  switch (label) {
+                    default:
+                      return kFormatter(label.toFixed(3));
+                  }
+                },
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: false,
+                display: true,
+                color: axesColor,
+                zeroLineColor: pointColor,
+                tickMarkLength: 0,
+              },
+            },
+          ],
+        },
+      },
+    });
+  }, [axesColor, labels, pointColor, points, title]);
+
+  useEffect(() => {
+    drawCharts();
+  }, [drawCharts]);
+
+  return (
+    <div className="graph-container">
+      <div className="stats">
+        <h5 style={{ color: metricTitle }}>{title}</h5>
+        <h4 style={{ color: metricNumber }}>{metric}</h4>
+      </div>
+      <div className="graph">
+        <div className="chart-container">
+          <canvas id={title} style={{ maxWidth: '100%' }}></canvas>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-export default GraphContainer;

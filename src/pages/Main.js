@@ -5,7 +5,7 @@ import { ThemeContext } from '../context/ThemeContext';
 
 import TitleElement from '../components/titleElement/TitleElement';
 import { AntMetrics } from '../components/antMetrics/AntMetrics';
-import AnjMetrics from '../components/anjMetrics/AnjMetrics';
+import { AnjMetrics } from '../components/anjMetrics/AnjMetrics';
 
 export function Main() {
   const { isLight, lightTheme, darkTheme, switchTheme } = useContext(ThemeContext);
