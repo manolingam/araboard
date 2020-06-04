@@ -21,7 +21,7 @@ export function GraphContainer(props) {
       : Math.abs(num) >= 1000
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(2) + 'k'
       : Math.abs(num) > 1
-      ? Math.sign(num) * Math.abs(num).toFixed(2)
+      ? Math.sign(num) * Math.abs(num).toFixed(0)
       : Math.sign(num) * Math.abs(num).toFixed(3);
   };
 
