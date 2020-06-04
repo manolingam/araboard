@@ -66,10 +66,10 @@ export function GraphContainer(props) {
                 tickMarkLength: 0,
               },
               ticks: {
-                min: _.min(points) - plotPointGap,
-                // max: _.max(points) + plotPointGap,
-                stepSize: plotPointGap,
-                padding: 10,
+                min: _.min(points) - (plotPointGap * 0.5),
+                max: _.max(points) + (plotPointGap * 1.1),
+                stepSize: plotPointGap * 0.8,
+                padding: 15,
 
                 callback: function (label, index, labels) {
                   switch (label) {
