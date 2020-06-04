@@ -17,10 +17,12 @@ export function GraphContainer(props) {
   // function to format big numbers in 2K, 320K, 1M etc.
   const kFormatter = (num) => {
     return Math.abs(num) >= 1000000
-      ? Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + 'm'
+      ? Math.sign(num) * (Math.abs(num) / 1000000).toFixed(2) + 'm'
       : Math.abs(num) >= 1000
-      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
-      : Math.sign(num) * Math.abs(num);
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(2) + 'k'
+      : Math.abs(num) > 1
+      ? Math.sign(num) * Math.abs(num).toFixed(2)
+      : Math.sign(num) * Math.abs(num).toFixed(3);
   };
 
   const drawCharts = React.useCallback(() => {
@@ -53,6 +55,11 @@ export function GraphContainer(props) {
         },
         tooltips: {
           enabled: true,
+          callbacks: {
+            label: function (tooltipItem, data) {
+              return kFormatter(tooltipItem.yLabel);
+            },
+          },
         },
         maintainAspectRatio: false,
 
