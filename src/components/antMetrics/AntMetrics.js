@@ -75,7 +75,7 @@ export function AntMetrics() {
                 loading={antMetrics.loading || antStaking.loading}
                 error={antStaking.error || antMetrics.error}
                 component={StakingFormat}
-                props={{ staked: antStaking.value, supply: antMetrics.metrics?.supply }}
+                props={{ staked: antStaking.value, metrics: antMetrics.metrics }}
               />
             </h4>
           </div>
