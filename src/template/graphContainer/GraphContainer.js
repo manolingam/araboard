@@ -11,8 +11,8 @@ export function GraphContainer(props) {
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
-  var removedPoints = points.splice(0, 3); // removed last 3 elements
-  var removedLabels = labels.splice(0, 3); // removed last 3 elements
+  // var removedPoints = points.splice(0, 3); // removed last 3 elements
+  // var removedLabels = labels.splice(0, 3); // removed last 3 elements
 
   // function to format big numbers in 2K, 320K, 1M etc.
   const kFormatter = (num) => {
@@ -75,8 +75,8 @@ export function GraphContainer(props) {
                 tickMarkLength: 0,
               },
               ticks: {
-                min: _.min(points) - plotPointGap * 0.5,
-                max: _.max(points) + plotPointGap * 1.1,
+                min: _.min(points) - plotPointGap * 0.6,
+                // max: _.max(points) + plotPointGap * 0.9,
                 stepSize: plotPointGap * 0.8,
                 padding: 15,
 
