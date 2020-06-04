@@ -11,17 +11,18 @@ export function GraphContainer(props) {
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
-  var removedPoints = points.splice(0,3) // removed last 3 elements
-  var removedLabels = labels.splice(0,3) // removed last 3 elements
+  var removedPoints = points.splice(0, 3); // removed last 3 elements
+  var removedLabels = labels.splice(0, 3); // removed last 3 elements
 
   // function to format big numbers in 2K, 320K, etc.
   const kFormatter = (num) => {
-    return Math.abs(num) > 1000000 ? Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
-  }
+    return Math.abs(num) > 1000000
+      ? Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + 'k'
+      : Math.sign(num) * Math.abs(num);
+  };
 
   const drawCharts = React.useCallback(() => {
-
-    let plotPointGap = (_.max(points) - _.min(points)) / 3 // the step gap for each point
+    let plotPointGap = (_.max(points) - _.min(points)) / 3; // the step gap for each point
 
     let ctx = '';
     ctx = document.getElementById(title).getContext('2d');
@@ -69,7 +70,7 @@ export function GraphContainer(props) {
                 // max: _.max(points) + plotPointGap,
                 stepSize: plotPointGap,
                 padding: 10,
-  
+
                 callback: function (label, index, labels) {
                   switch (label) {
                     default:
@@ -87,6 +88,9 @@ export function GraphContainer(props) {
                 color: axesColor,
                 zeroLineColor: pointColor,
                 tickMarkLength: 0,
+              },
+              ticks: {
+                padding: 15,
               },
             },
           ],
