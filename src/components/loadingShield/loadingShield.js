@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 
-import './loadingShield.css'
-
 export function LoadingShield(props) {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const { loading, error } = props;

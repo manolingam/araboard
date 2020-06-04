@@ -11,7 +11,14 @@ export function AragonDaoChart() {
 
   const renderChart = () => {
     if (loading) {
-      return <>...</>;
+      return (
+        <div className='spinner-container'>
+          <div className="spinner">
+            <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
+            <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
+          </div>
+        </div>
+      )
     } else if (error) {
       return <>X_X</>;
     } else {
