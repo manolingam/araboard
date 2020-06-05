@@ -11,6 +11,7 @@ export function blockNumbers(today, lastBlockNumber) {
     return {
       blockNumber,
       day,
+      timestamp: day
     };
   });
 }

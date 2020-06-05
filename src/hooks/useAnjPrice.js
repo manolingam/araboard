@@ -138,6 +138,7 @@ export function useAnjPrice(anjSupply) {
           });
         })
         .catch((error) => {
+          console.error(error)
           setState({
             loading: false,
             error: error,
