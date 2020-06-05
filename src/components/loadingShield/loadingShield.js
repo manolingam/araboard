@@ -15,6 +15,7 @@ export function LoadingShield(props) {
     </div>
     )
   } else if (error) {
+    console.error(error)
     return <>X_X</>;
   } else {
     const Component = props.component;

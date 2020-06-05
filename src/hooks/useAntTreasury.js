@@ -60,6 +60,7 @@ export function useAntTreasury() {
           });
         })
         .catch((error) => {
+          console.error(error)
           setState({
             loading: false,
             error: error,
