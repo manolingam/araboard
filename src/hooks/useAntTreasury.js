@@ -6,8 +6,8 @@ import {
   ANT_ADDR_MAINNET,
   ANT_ANJ_TOKEN_CONTRACT_ABI,
   DECIMALS,
-  NETWORK_AGENT_ADDR, NETWORK_RESERVE_ADDR
-} from "./contracts.util";
+  NETWORK_AGENT_ADDR,
+} from './contracts.util';
 import { blockNumbers } from './blockNumbers.util';
 import BigNumber from 'bignumber.js';
 import { useAntPrice } from './useAntPrice';
@@ -29,10 +29,7 @@ export function useAntTreasury() {
 
   const balanceOfAt = async (contract, blockNumber) => {
     const agentBalanceS = await contract.methods.balanceOfAt(NETWORK_AGENT_ADDR, blockNumber).call();
-    const reserveBalanceS = await contract.methods.balanceOfAt(NETWORK_RESERVE_ADDR, blockNumber).call();
-    const agentBalance = new BigNumber(agentBalanceS).div(10 ** DECIMALS).toNumber();
-    const reserveBalance = new BigNumber(reserveBalanceS).div(10 ** DECIMALS).toNumber();
-    return agentBalance + reserveBalance;
+    return new BigNumber(agentBalanceS).div(10 ** DECIMALS).toNumber();
   };
 
   const fetchTreasury = useCallback(() => {
@@ -60,7 +57,7 @@ export function useAntTreasury() {
           });
         })
         .catch((error) => {
-          console.error(error)
+          console.error(error);
           setState({
             loading: false,
             error: error,
