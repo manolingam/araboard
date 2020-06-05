@@ -13,6 +13,7 @@ import BigNumber from 'bignumber.js';
 import { useAntPrice } from './useAntPrice';
 import { useAnjPrice } from './useAnjPrice';
 import { useAnjSupply } from './useAnjSupply';
+import * as _ from 'lodash';
 const Web3EthContract = require('web3-eth-contract');
 
 const today = DateTime.local();
@@ -38,8 +39,12 @@ export function useAntTreasury() {
       const balanceP = blocks.map(async (point) => {
         const antTreasuryBalance = await balanceOfAt(AntTokenContract, point.blockNumber);
         const anjTreasuryBalance = await balanceOfAt(AnjTokenContract, point.blockNumber);
-        const antPricePoint = antPrice.data[antPrice.data.length - 1];
-        const anjPricePoint = anjPrice.data[anjPrice.data.length - 1];
+        const antPricePoint = _.minBy(antPrice.data, (pricePoint) => {
+          return Math.abs(pricePoint.timestamp.valueOf() - point.timestamp.valueOf());
+        });
+        const anjPricePoint = _.minBy(anjPrice.data, (pricePoint) => {
+          return Math.abs(pricePoint.timestamp.valueOf() - point.timestamp.valueOf());
+        });
         const antTreasuryUSD = antTreasuryBalance * antPricePoint.value;
         // const anjTreasuryUSD = 0// anjTreasuryBalance * anjPricePoint.value;
         const anjTreasuryUSD = anjTreasuryBalance * anjPricePoint.value;
@@ -53,7 +58,7 @@ export function useAntTreasury() {
           setState({
             loading: false,
             error: null,
-            data: balanceTimeseries,
+            data: balanceTimeseries.reverse(),
           });
         })
         .catch((error) => {
