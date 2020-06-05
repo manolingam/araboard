@@ -28,7 +28,7 @@ export function TreasuryChart() {
       };
     });
     const lastPoint = graphData[graphData.length - 1].value
-    const lastPointFormatted = numeral(lastPoint).format('0.0a')
+    const lastPointFormatted = numeral(lastPoint).format('$0.0a')
     return (
       <GraphContainer
         title="Treasury"
