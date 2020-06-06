@@ -17,6 +17,11 @@
 	padding: 20px;
 }
 
+.stats.ant-metrics-stats {
+  display: flex;
+  flex-direction: column;
+}
+
 .ant-metrics-stats .stats{
 	padding: 30px 30px 30px 10px;
 }
@@ -30,9 +35,9 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.ant-metrics-stats {
+	.stats.ant-metrics-stats {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		padding: 30px;
 		border-bottom-left-radius: 8.5px;
 		border-bottom-right-radius: 8.5px;

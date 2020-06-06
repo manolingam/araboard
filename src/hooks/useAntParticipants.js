@@ -69,10 +69,11 @@ export function useAntParticipants() {
           data: series
         })
       })
-      .catch((err) => {
+      .catch((error) => {
+        console.error(error)
         setState({
           loading: false,
-          error: err,
+          error: error,
           data: null
         })
       });
