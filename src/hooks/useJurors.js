@@ -64,6 +64,7 @@ export function useJurors() {
           });
         })
         .catch((error) => {
+          console.error(error)
           setState({
             loading: false,
             error: error,

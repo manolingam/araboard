@@ -16,6 +16,7 @@ export function useQuery(endpoint, query) {
         });
       })
       .catch((error) => {
+        console.error(error)
         setState({
           loading: false,
           error: error,

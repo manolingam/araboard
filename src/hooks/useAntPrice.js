@@ -28,6 +28,7 @@ export function useAntPrice() {
           });
         })
         .catch((error) => {
+          console.error(error)
           setState({
             loading: false,
             error: error,
