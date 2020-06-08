@@ -125,7 +125,7 @@ export function GraphContainer(props) {
             <canvas id={title} style={{ maxWidth: '100%' }}></canvas>
           </div>
         </div>
-        <PeriodSelector pointColor={props.pointColor} defaultPeriod={props.defaultPeriod} onChange={onPeriodChange} />
+        <PeriodSelector pointColor={props.pointColor} period={props.period} onChange={onPeriodChange} />
       </div>
     </div>
   );

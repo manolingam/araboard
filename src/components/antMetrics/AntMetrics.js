@@ -7,7 +7,7 @@ import { LoadingShield } from '../loadingShield/loadingShield';
 import { PriceFormat } from '../priceFormat/priceFormat';
 import { useAntStaking } from '../../hooks/useAntStaking';
 import { StakingFormat } from '../stakingFormat/stakingFormat';
-import { AragonDaoContainer } from "./AragonDaoContainer";
+import { AragonDaoContainer } from './AragonDaoContainer';
 
 export function AntMetrics() {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -81,7 +81,7 @@ export function AntMetrics() {
           </div>
         </div>
       </div>
-      <AragonDaoContainer/>
+      <AragonDaoContainer />
     </div>
   );
 }

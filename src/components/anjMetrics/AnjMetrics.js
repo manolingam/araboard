@@ -10,13 +10,18 @@ import { AnjPriceChart } from '../anjPriceChart/AnjPriceChart';
 import { useAnjSupply } from '../../hooks/useAnjSupply';
 import { AnjNetworkValueChart } from '../anjNetworkValueChart/anjNetworkValueChart';
 import { useAnjPrice } from '../../hooks/useAnjPrice';
+import { Period } from '../../template/graphContainer/Period';
+import { useAntPrice } from '../../hooks/useAntPrice';
+import { ServicesContext } from "../../context/ServicesContext";
 
 export function AnjMetrics() {
+  const services = useContext(ServicesContext)
   const lastBlockNumber = useLastBlockNumber();
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const anjSupply = useAnjSupply(lastBlockNumber);
-  const anjPrice = useAnjPrice(anjSupply);
+  const anjSupply = useAnjSupply();
+  const antPrice = useAntPrice(Period.M1);
+  const anjPrice = useAnjPrice(Period.M1, anjSupply, antPrice); // FIXME
 
   return (
     <div className="component-container">

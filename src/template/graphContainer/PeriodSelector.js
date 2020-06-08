@@ -7,7 +7,7 @@ import Radio from '@material-ui/core/Radio';
 import { Period } from './Period';
 
 export function PeriodSelector(props) {
-  const { pointColor, defaultPeriod, onChange } = props;
+  const { pointColor, period, onChange } = props;
 
   const THEME = createMuiTheme({
     typography: {
@@ -30,11 +30,8 @@ export function PeriodSelector(props) {
     },
   }))(Radio);
 
-  const [value, setValue] = React.useState(defaultPeriod);
-
   const handleChange = (event) => {
     const selected = event.target.value;
-    setValue(selected);
     if (onChange) {
       onChange(selected);
     }
@@ -43,7 +40,7 @@ export function PeriodSelector(props) {
   return (
     <ThemeProvider theme={THEME}>
       <FormControl component="fieldset">
-        <RadioGroup row aria-label="timeframe" name="timeframe" value={value} onChange={handleChange}>
+        <RadioGroup row aria-label="timeframe" name="timeframe" value={period} onChange={handleChange}>
           <StyledFormControlLabel value={Period.M1} control={<StyledRadio size="small" />} label="1 MONTH" />
           <StyledFormControlLabel value={Period.M3} control={<StyledRadio size="small" />} label="3 MONTHS" />
           <StyledFormControlLabel value={Period.M6} control={<StyledRadio size="small" />} label="6 MONTHS" />

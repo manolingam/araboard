@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { ThemeContextProvider } from './context/ThemeContext';
-import { EthereumEndpointProvider } from "./context/EthereumProviderContext";
 
 import { Main } from './pages/Main';
 
 import './App.css';
+import { ServicesProvider } from './context/ServicesContext';
 
 export function App() {
   return (
     <ThemeContextProvider>
-      <EthereumEndpointProvider>
+      <ServicesProvider>
         <Main />
-      </EthereumEndpointProvider>
+      </ServicesProvider>
     </ThemeContextProvider>
   );
 }

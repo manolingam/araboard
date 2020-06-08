@@ -2,14 +2,16 @@ import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import numeral from 'numeral';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import { useAntTreasury } from '../../hooks/useAntTreasury';
 import { Period } from '../../template/graphContainer/Period';
+import { ServicesContext } from '../../context/ServicesContext';
+import { usePromise } from '../../hooks/usePromise';
 
 export function TreasuryChart() {
+  const service = useContext(ServicesContext);
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
   const [period, setPeriod] = useState(Period.M1);
-  const { loading, error, data } = useAntTreasury(period);
+  const { loading, error, data } = usePromise(service.antTreasury.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {
     setPeriod(period);
@@ -40,7 +42,7 @@ export function TreasuryChart() {
         title="Treasury"
         metric={lastPointFormatted}
         data={graphData}
-        defaultPeriod={period}
+        period={period}
         onPeriodChange={handlePeriodChange}
         metricTitle={theme.firstInSeries}
         metricNumber={theme.metricNumbers}

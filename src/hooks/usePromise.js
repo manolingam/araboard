@@ -1,22 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
-import { ServicesContext } from '../context/ServicesContext';
+import { useEffect, useState } from 'react';
 
-/**
- * In USD
- */
-export function useAnjPrice(period) {
-  const services = useContext(ServicesContext);
-
+export function usePromise(promise, deps = []) {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    services.anjPrice
-      .timeseries(period)
-      .then((timeseries) => {
+    setState({
+      loading: true,
+      error: null,
+      data: null,
+    });
+    promise
+      .then((result) => {
         setState({
           loading: false,
           error: null,
-          data: timeseries,
+          data: result,
         });
       })
       .catch((error) => {
@@ -27,7 +25,7 @@ export function useAnjPrice(period) {
           data: null,
         });
       });
-  }, [period]);
+  }, deps);
 
   return state;
 }

@@ -1,15 +1,17 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import { useAntParticipants } from '../../hooks/useAntParticipants';
 import numeral from 'numeral';
 import { Period } from '../../template/graphContainer/Period';
+import { usePromise } from '../../hooks/usePromise';
+import { ServicesContext } from '../../context/ServicesContext';
 
 export function AragonParticipantsChart() {
+  const services = useContext(ServicesContext);
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
   const [period, setPeriod] = useState(Period.M1);
-  const { loading, error, data } = useAntParticipants(period);
+  const { loading, error, data } = usePromise(services.antParticipants.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {
     setPeriod(period);
@@ -33,14 +35,14 @@ export function AragonParticipantsChart() {
         label: data.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
       };
     });
-    const lastPoint = graphData[graphData.length - 1].value;
-    const lastParticipants = numeral(lastPoint).format('0.0a');
+    const lastPoint = graphData[graphData.length - 1];
+    const lastParticipants = numeral(lastPoint?.value).format('0.0a');
     return (
       <GraphContainer
         title="Participants"
         metric={lastParticipants}
         data={graphData}
-        defaultPeriod={period}
+        period={period}
         onPeriodChange={handlePeriodChange}
         metricTitle={theme.firstInSeries}
         metricNumber={theme.metricNumbers}
