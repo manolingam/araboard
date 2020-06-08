@@ -37,7 +37,6 @@ export class AntParticipantsService {
       const daysNumber = totalDays(period);
       const allDays = _.times(daysNumber).map((i) => today.minus({ day: i }));
       const actualDaysToLoad = dayChunks(allDays).map((d) => _.maxBy(d, (d) => d.startOf('day').valueOf()));
-      const actualDaysToLoadValues = actualDaysToLoad.map((d) => d.valueOf());
       const loaded = actualDaysToLoad.map(async (day) => {
         const data = await graphQLClient.request(GET_STATS_AROUND_DAY(day));
         return data.stats.map((stat) => {

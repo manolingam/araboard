@@ -1,23 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import { ThemeContext } from '../../context/ThemeContext';
 import numeral from 'numeral';
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
+import { useTheme } from '../../hooks/useTheme';
+import { ServicesContext } from '../../context/ServicesContext';
+import { Period } from '../../template/graphContainer/Period';
+import { usePromise } from '../../hooks/usePromise';
 
 export function AnjSupplyChart(props) {
-  const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
-  const theme = isLight ? lightTheme : darkTheme;
-  const anjSupply = props.anjSupply
+  const services = useContext(ServicesContext);
+  const theme = useTheme();
+  const [period, setPeriod] = useState(Period.M1);
+  const anjSupply = usePromise(services.anjSupply.timeseries(period), [period]);
+
+  const handlePeriodChange = (period) => {
+    setPeriod(period);
+  };
 
   if (anjSupply.loading) {
     return (
-      <div className='spinner-container'>
+      <div className="spinner-container">
         <div className="spinner">
-          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
-          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
+          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }} />
+          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }} />
         </div>
       </div>
-    )
+    );
   } else if (anjSupply.error) {
     return <>X_X</>;
   } else {
@@ -34,6 +42,8 @@ export function AnjSupplyChart(props) {
         title="Supply"
         metric={lastPointFormatted}
         data={timeseries}
+        period={period}
+        onPeriodChange={handlePeriodChange}
         metricTitle={theme.secondInSeries}
         metricNumber={theme.metricNumbers}
         pointColor={theme.secondInSeriesPoint}

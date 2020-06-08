@@ -1,15 +1,22 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import React, { useContext, useMemo } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import React, { useContext, useMemo, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import numeral from "numeral";
+import numeral from 'numeral';
+import { useTheme } from '../../hooks/useTheme';
+import { ServicesContext } from '../../context/ServicesContext';
+import { Period } from '../../template/graphContainer/Period';
+import { usePromise } from '../../hooks/usePromise';
 
-export function AnjNetworkValueChart(props) {
-  const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
-  const theme = isLight ? lightTheme : darkTheme;
+export function AnjNetworkValueChart() {
+  const services = useContext(ServicesContext);
+  const [period, setPeriod] = useState(Period.M1);
+  const theme = useTheme();
+  const anjSupply = usePromise(services.anjSupply.timeseries(period), [period]);
+  const anjPrice = usePromise(services.anjPrice.timeseries(period), [period]);
 
-  const anjSupply = props.anjSupply;
-  const anjPrice = props.anjPrice;
+  const handlePeriodChange = (period) => {
+    setPeriod(period);
+  };
 
   const loading = useMemo(() => {
     return anjSupply.loading || anjPrice.loading;
@@ -43,13 +50,13 @@ export function AnjNetworkValueChart(props) {
 
   if (loading) {
     return (
-      <div className='spinner-container'>
+      <div className="spinner-container">
         <div className="spinner">
-          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }}/>
-          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }}/>
+          <div className="double-bounce1" style={{ backgroundColor: theme.metricNumbers }} />
+          <div className="double-bounce2" style={{ backgroundColor: theme.metricNumbers }} />
         </div>
       </div>
-    )
+    );
   } else if (error) {
     return <>X_X</>;
   } else {
@@ -58,6 +65,8 @@ export function AnjNetworkValueChart(props) {
         title="Network Val."
         metric={lastPointFormatted}
         data={timeseries}
+        period={period}
+        onPeriodChange={handlePeriodChange}
         metricTitle={theme.thirdInSeries}
         metricNumber={theme.metricNumbers}
         pointColor={theme.thirdInSeriesPoint}

@@ -10,6 +10,7 @@ import { AnjMetrics } from '../components/anjMetrics/AnjMetrics';
 export function Main() {
   const { isLight, lightTheme, darkTheme, switchTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
+
   return (
     <div className="app" style={{ background: theme.appBackground }}>
       <div className="switch">

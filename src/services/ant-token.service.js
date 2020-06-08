@@ -1,4 +1,4 @@
-import { ANT_ADDR_MAINNET, ANT_ANJ_TOKEN_CONTRACT_ABI, NETWORK_RESERVE_ADDR } from '../hooks/contracts.util';
+import { ANT_ADDR_MAINNET, ANT_ANJ_TOKEN_CONTRACT_ABI } from '../hooks/contracts.util';
 import BigNumber from 'bignumber.js';
 
 const Web3EthContract = require('web3-eth-contract');

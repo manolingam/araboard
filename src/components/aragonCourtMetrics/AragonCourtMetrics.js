@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { JurorsChart } from '../jurorsChart/jurorsChart';
 import { AnjActivatedChart } from '../anjActivatedChart/AnjActivatedChart';
-import { ThemeContext } from '../../context/ThemeContext';
-import { useJurors } from '../../hooks/useJurors';
+import { useTheme } from '../../hooks/useTheme';
 
 export function AragonCourtMetrics() {
-  const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
-  const theme = isLight ? lightTheme : darkTheme;
-  const jurors = useJurors();
+  const theme = useTheme();
 
   return (
     <div className="component-sub-container anj" style={{ borderColor: theme.borderColor }}>
@@ -23,8 +20,8 @@ export function AragonCourtMetrics() {
       </div>
 
       <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
-        <JurorsChart jurors={jurors} />
-        <AnjActivatedChart jurors={jurors} />
+        <JurorsChart />
+        <AnjActivatedChart />
       </div>
     </div>
   );
