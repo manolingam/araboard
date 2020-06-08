@@ -1,26 +1,30 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const COINGECKO = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=aragon&sparkline=false';
+import { useContext, useEffect, useState } from 'react';
+import { ServicesContext } from '../context/ServicesContext';
 
 export function useAntMetrics() {
+  const services = useContext(ServicesContext);
   const [state, setState] = useState({ loading: true, error: null, metrics: null });
 
   useEffect(() => {
-    axios.get(COINGECKO).then((response) => {
-      const rawMetrics = response.data[0];
-      const metrics = {
-        price: rawMetrics.current_price,
-        supply: rawMetrics.total_supply,
-        marketCap: rawMetrics.market_cap
-      };
-      setState({
-        loading: false,
-        error: null,
-        metrics: metrics,
-      });
-    });
-  }, []);
+    if (!state.metrics) {
+      services.coingecko
+        .antMetrics()
+        .then((metrics) => {
+          setState({
+            loading: false,
+            error: null,
+            metrics: metrics,
+          });
+        })
+        .catch((error) => {
+          setState({
+            loading: false,
+            error: error,
+            metrics: null,
+          });
+        });
+    }
+  }, [services]);
 
   return state;
 }
