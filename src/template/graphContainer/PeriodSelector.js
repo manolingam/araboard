@@ -7,6 +7,8 @@ import Radio from '@material-ui/core/Radio';
 import { Period } from './Period';
 
 export function PeriodSelector(props) {
+  const { pointColor, defaultPeriod, onChange } = props;
+
   const THEME = createMuiTheme({
     typography: {
       fontFamily: "'Overpass', sans-serif;",
@@ -18,20 +20,24 @@ export function PeriodSelector(props) {
 
   const StyledFormControlLabel = withStyles(() => ({
     root: {
-      color: props.pointColor,
+      color: pointColor,
     },
   }))(FormControlLabel);
 
   const StyledRadio = withStyles(() => ({
     root: {
-      color: props.pointColor,
+      color: pointColor,
     },
   }))(Radio);
 
-  const [value, setValue] = React.useState(props.defaultPeriod);
+  const [value, setValue] = React.useState(defaultPeriod);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    const selected = event.target.value;
+    setValue(selected);
+    if (onChange) {
+      onChange(selected);
+    }
   };
 
   return (

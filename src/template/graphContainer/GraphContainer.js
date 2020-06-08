@@ -8,7 +8,7 @@ import { PeriodSelector } from './PeriodSelector';
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
 export function GraphContainer(props) {
-  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data } = props;
+  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data, onPeriodChange } = props;
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
@@ -125,7 +125,7 @@ export function GraphContainer(props) {
             <canvas id={title} style={{ maxWidth: '100%' }}></canvas>
           </div>
         </div>
-        <PeriodSelector pointColor={props.pointColor} defaultPeriod={props.defaultPeriod} />
+        <PeriodSelector pointColor={props.pointColor} defaultPeriod={props.defaultPeriod} onChange={onPeriodChange} />
       </div>
     </div>
   );

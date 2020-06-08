@@ -18,7 +18,7 @@ const Web3EthContract = require('web3-eth-contract');
 
 const today = DateTime.local();
 
-export function useAntTreasury() {
+export function useAntTreasury(period) {
   const lastBlockNumber = useLastBlockNumber();
   const antPrice = useAntPrice();
   const anjSupply = useAnjSupply(lastBlockNumber);
