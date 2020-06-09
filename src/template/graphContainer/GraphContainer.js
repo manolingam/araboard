@@ -1,41 +1,14 @@
 import React, { useEffect } from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { withStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Chart from 'chart.js';
 import * as _ from 'lodash';
 
 import './GraphContainer.css';
+import { PeriodSelector } from './PeriodSelector';
 
 Chart.defaults.global.defaultFontFamily = "'Overpass', sans-serif";
 
 export function GraphContainer(props) {
-  const THEME = createMuiTheme({
-    typography: {
-      fontFamily: "'Overpass', sans-serif;",
-      body1: {
-        fontSize: '10pt',
-      },
-    },
-  });
-
-  const StyledFormControlLabel = withStyles(() => ({
-    root: {
-      color: props.pointColor,
-    },
-  }))(FormControlLabel);
-
-  const StyledRadio = withStyles(() => ({
-    root: {
-      color: props.pointColor,
-    },
-  }))(Radio);
-
-  const [value, setValue] = React.useState('female');
-
-  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data } = props;
+  const { title, pointColor, axesColor, metricTitle, metric, metricNumber, data, onPeriodChange } = props;
   const points = data?.map((point) => point.value) || [100, 200, 300, 400, 350, 500, 450, 550, 650, 600];
   const labels = data?.map((point) => point.label) || ['', '', '', '', '', '', '', '', '', ''];
 
@@ -51,10 +24,6 @@ export function GraphContainer(props) {
       : Math.abs(num) > 1
       ? Math.sign(num) * Math.abs(num).toFixed(0)
       : Math.sign(num) * Math.abs(num).toFixed(3);
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
   };
 
   const drawCharts = React.useCallback(() => {
@@ -156,15 +125,7 @@ export function GraphContainer(props) {
             <canvas id={title} style={{ maxWidth: '100%' }}></canvas>
           </div>
         </div>
-        <ThemeProvider theme={THEME}>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="timeframe" name="timeframe" value={value} onChange={handleChange}>
-              <StyledFormControlLabel value="1m" control={<StyledRadio size="small" />} label="1 MONTH" />
-              <StyledFormControlLabel value="3m" control={<StyledRadio size="small" />} label="3 MONTHS" />
-              <StyledFormControlLabel value="6m" control={<StyledRadio size="small" />} label="6 MONTHS" />
-            </RadioGroup>
-          </FormControl>
-        </ThemeProvider>
+        <PeriodSelector pointColor={props.pointColor} period={props.period} onChange={onPeriodChange} />
       </div>
     </div>
   );
