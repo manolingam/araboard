@@ -17,11 +17,6 @@ export function blockNumbers(today, lastBlockNumber) {
   });
 }
 
-export function headOfPeriod(today, period) {
-  const shift = totalDays(period);
-  return today.minus({ day: shift });
-}
-
 export function totalDays(period) {
   switch (period) {
     case Period.M1:
@@ -35,14 +30,28 @@ export function totalDays(period) {
   }
 }
 
-export function dayChunks(items) {
-  return _.chunk(items, Math.floor(items.length / 30));
+function pointsPerPeriod(period) {
+  switch (period) {
+    case Period.M1:
+      return 10;
+    case Period.M3:
+      return 20;
+    case Period.M6:
+      return 30;
+    default:
+      throw new Error(`Unknown period ${period}`);
+  }
+}
+
+export function dayChunks(items, period) {
+  const pointsAmount = pointsPerPeriod(period)
+  return _.chunk(items, Math.floor(items.length / pointsAmount));
 }
 
 export function blockNumbersForPeriod(today, period, lastBlockNumber) {
   const daysNumber = totalDays(period);
   const allShifts = _.times(daysNumber).map((i) => -1 * i);
-  const actualShifts = dayChunks(allShifts).map(_.max);
+  const actualShifts = dayChunks(allShifts, period).map(_.max);
   return actualShifts.map((shift) => {
     const blockNumber = lastBlockNumber + shift * BLOCKS_PER_DAY;
     const day = today.minus({ day: -1 * shift });

@@ -45,7 +45,7 @@ export function GraphContainer(props) {
             pointBackgroundColor: pointColor,
             borderColor: pointColor,
             borderWidth: 2,
-            pointRadius: 1,
+            pointRadius: 0,
             pointHitRadius: 6,
             // borderDash: [7, 5],
             backgroundColor: 'transparent',
@@ -103,7 +103,7 @@ export function GraphContainer(props) {
               },
               ticks: {
                 padding: 15,
-                display: false
+                // display: false
               },
             },
           ],
