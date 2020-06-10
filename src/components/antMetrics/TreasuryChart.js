@@ -5,6 +5,7 @@ import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import { Period } from '../../template/graphContainer/Period';
 import { ServicesContext } from '../../context/ServicesContext';
 import { usePromise } from '../../hooks/usePromise';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function TreasuryChart() {
   const service = useContext(ServicesContext);
@@ -32,7 +33,7 @@ export function TreasuryChart() {
     const graphData = data.map((data) => {
       return {
         value: data.value,
-        label: data.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+        label: chartLabel(data.timestamp)
       };
     });
     const lastPoint = graphData[graphData.length - 1].value;

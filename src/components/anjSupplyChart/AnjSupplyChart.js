@@ -6,6 +6,7 @@ import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
 import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function AnjSupplyChart(props) {
   const services = useContext(ServicesContext);
@@ -32,7 +33,7 @@ export function AnjSupplyChart(props) {
     const timeseries = anjSupply.data.map((point) => {
       return {
         value: Math.round(new BigNumber(point.value).dividedBy(10 ** 18).toNumber()),
-        label: point.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+        label: chartLabel(point.timestamp)
       };
     });
     const lastPoint = timeseries[timeseries.length - 1].value;

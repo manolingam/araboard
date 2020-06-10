@@ -6,6 +6,7 @@ import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
 import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function AnjNetworkValueChart() {
   const services = useContext(ServicesContext);
@@ -34,7 +35,7 @@ export function AnjNetworkValueChart() {
         const usdPrice = pricePoint.value;
         const networkValue = usdPrice * supplyAmount;
         return {
-          label: supplyPoint.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+          label: chartLabel(supplyPoint.timestamp),
           value: networkValue,
         };
       });
