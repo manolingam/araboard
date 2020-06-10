@@ -13,7 +13,7 @@ export function PeriodSelector(props) {
     typography: {
       fontFamily: "'Overpass', sans-serif;",
       body1: {
-        fontSize: '10pt',
+        fontSize: '10px',
       },
     },
   });
@@ -27,6 +27,14 @@ export function PeriodSelector(props) {
   const StyledRadio = withStyles(() => ({
     root: {
       color: pointColor,
+    },
+    checked: {
+      color: pointColor,
+    },
+    colorSecondary: {
+      '&$checked': {
+        color: pointColor,
+      },
     },
   }))(Radio);
 
