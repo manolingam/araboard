@@ -36,7 +36,7 @@ export function totalDays(period) {
 }
 
 export function dayChunks(items) {
-  return _.chunk(items, Math.floor(items.length / 10));
+  return _.chunk(items, Math.floor(items.length / 30));
 }
 
 export function blockNumbersForPeriod(today, period, lastBlockNumber) {

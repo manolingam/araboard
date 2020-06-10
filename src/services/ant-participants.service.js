@@ -58,8 +58,8 @@ export class AntParticipantsService {
           value: mean,
         });
       }
-      const step = Math.round(daySeries.length / 10);
-      const result = _.chunk(_.sortBy(daySeries, (s) => s.timestamp.valueOf()).reverse(), step)
+      const sorted = _.sortBy(daySeries, (s) => s.timestamp.valueOf()).reverse()
+      const result = dayChunks(sorted)
         .map((group) => {
           const timestamp = group[0].timestamp;
           const value = _.max(group.map((g) => g.value));

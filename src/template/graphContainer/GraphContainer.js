@@ -41,11 +41,13 @@ export function GraphContainer(props) {
           {
             label: '',
             data: points,
-            pointBorderWidth: 2,
+            pointBorderWidth: 0,
             pointBackgroundColor: pointColor,
             borderColor: pointColor,
             borderWidth: 2,
-            borderDash: [7, 5],
+            pointRadius: 1,
+            pointHitRadius: 6,
+            // borderDash: [7, 5],
             backgroundColor: 'transparent',
           },
         ],
@@ -101,6 +103,7 @@ export function GraphContainer(props) {
               },
               ticks: {
                 padding: 15,
+                display: false
               },
             },
           ],
