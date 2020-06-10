@@ -44,7 +44,7 @@ function pointsPerPeriod(period) {
 }
 
 export function dayChunks(items, period) {
-  const pointsAmount = pointsPerPeriod(period)
+  const pointsAmount = pointsPerPeriod(period);
   return _.chunk(items, Math.floor(items.length / pointsAmount));
 }
 
@@ -61,4 +61,8 @@ export function blockNumbersForPeriod(today, period, lastBlockNumber) {
       timestamp: day,
     };
   });
+}
+
+export function chartLabel(timestamp) {
+  return timestamp.toLocaleString({ month: 'short', day: '2-digit' });
 }

@@ -5,6 +5,7 @@ import numeral from 'numeral';
 import { ServicesContext } from '../../context/ServicesContext';
 import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function AnjActivatedChart() {
   const services = useContext(ServicesContext);
@@ -33,7 +34,7 @@ export function AnjActivatedChart() {
     const timeseries = jurors.data.map((point) => {
       return {
         value: Math.round(point.activeBalance),
-        label: point.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+        label: chartLabel(point.timestamp)
       };
     });
     const lastPoint = timeseries[timeseries.length - 1].value;

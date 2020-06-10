@@ -5,6 +5,7 @@ import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
 import { usePromise } from '../../hooks/usePromise';
 import { Period } from '../../template/graphContainer/Period';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function AnjPriceChart() {
   const services = useContext(ServicesContext);
@@ -21,7 +22,7 @@ export function AnjPriceChart() {
       return anjPrice.data.map((point) => {
         return {
           value: point.value,
-          label: point.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+          label: chartLabel(point.timestamp)
         };
       });
     }
