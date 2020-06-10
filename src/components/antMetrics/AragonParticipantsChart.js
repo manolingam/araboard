@@ -5,6 +5,7 @@ import numeral from 'numeral';
 import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
 import { ServicesContext } from '../../context/ServicesContext';
+import { chartLabel } from "../../hooks/blockNumbers.util";
 
 export function AragonParticipantsChart() {
   const services = useContext(ServicesContext);
@@ -32,7 +33,7 @@ export function AragonParticipantsChart() {
     const graphData = data.map((data) => {
       return {
         value: data.value,
-        label: data.timestamp.toLocaleString({ month: 'long', day: '2-digit' }),
+        label: chartLabel(data.timestamp)
       };
     });
     const lastPoint = graphData[graphData.length - 1];
