@@ -31,7 +31,16 @@ export function AntMetrics() {
           }}
         >
           <h3 style={{ color: theme.metricBoxHeaderTitle }}>ARAGON NETWORK TOKEN</h3>
-          <h6 style={{ color: theme.metricBoxHelper }}>Read more</h6>
+          <h6 style={{ color: theme.metricBoxHelper }}>
+            <a
+              style={{ color: theme.titleHelper, textDecoration: 'none' }}
+              href="//aragon.org/token"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </a>
+          </h6>
         </div>
 
         <div className="stats" style={{ backgroundColor: theme.metricBoxBg }}>
