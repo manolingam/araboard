@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { ThemeContextProvider } from './context/ThemeContext';
+import { ServicesProvider } from './context/ServicesContext';
 
 import { Main } from './pages/Main';
 
 import './App.css';
-import { ServicesProvider } from './context/ServicesContext';
 
 export function App() {
   return (
