@@ -1,16 +1,16 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import numeral from 'numeral';
 import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
 import { usePromise } from '../../hooks/usePromise';
-import { Period } from '../../template/graphContainer/Period';
-import { chartLabel } from "../../hooks/blockNumbers.util";
+import { chartLabel } from '../../hooks/blockNumbers.util';
+import { usePeriod } from '../../hooks/usePeriod';
 
 export function AnjPriceChart() {
   const services = useContext(ServicesContext);
   const theme = useTheme();
-  const [period, setPeriod] = useState(Period.M1);
+  const [period, setPeriod] = usePeriod();
   const anjPrice = usePromise(services.anjPrice.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {
@@ -22,7 +22,7 @@ export function AnjPriceChart() {
       return anjPrice.data.map((point) => {
         return {
           value: point.value,
-          label: chartLabel(point.timestamp)
+          label: chartLabel(point.timestamp),
         };
       });
     }

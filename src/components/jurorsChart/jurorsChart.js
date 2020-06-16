@@ -1,17 +1,17 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import numeral from 'numeral';
-import { Period } from '../../template/graphContainer/Period';
 import { ServicesContext } from '../../context/ServicesContext';
 import { usePromise } from '../../hooks/usePromise';
 import { chartLabel } from '../../hooks/blockNumbers.util';
+import { usePeriod } from "../../hooks/usePeriod";
 
 export function JurorsChart() {
   const services = useContext(ServicesContext);
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const [period, setPeriod] = useState(Period.M1);
+  const [period, setPeriod] = usePeriod();
   const jurors = usePromise(services.jurors.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {

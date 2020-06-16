@@ -24,7 +24,7 @@ export function useAntMetrics() {
           });
         });
     }
-  }, [services]);
+  }, [services, state.metrics]);
 
   return state;
 }

@@ -1,16 +1,16 @@
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import numeral from 'numeral';
 import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
-import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
 import { chartLabel } from "../../hooks/blockNumbers.util";
+import { usePeriod } from "../../hooks/usePeriod";
 
 export function AnjNetworkValueChart() {
   const services = useContext(ServicesContext);
-  const [period, setPeriod] = useState(Period.M1);
+  const [period, setPeriod] = usePeriod();
   const theme = useTheme();
   const anjSupply = usePromise(services.anjSupply.timeseries(period), [period]);
   const anjPrice = usePromise(services.anjPrice.timeseries(period), [period]);

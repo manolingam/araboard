@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import numeral from 'numeral';
 import BigNumber from 'bignumber.js';
 import { useTheme } from '../../hooks/useTheme';
 import { ServicesContext } from '../../context/ServicesContext';
-import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
 import { chartLabel } from "../../hooks/blockNumbers.util";
+import { usePeriod } from "../../hooks/usePeriod";
 
-export function AnjSupplyChart(props) {
+export function AnjSupplyChart() {
   const services = useContext(ServicesContext);
   const theme = useTheme();
-  const [period, setPeriod] = useState(Period.M1);
+  const [period, setPeriod] = usePeriod();
   const anjSupply = usePromise(services.anjSupply.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {
