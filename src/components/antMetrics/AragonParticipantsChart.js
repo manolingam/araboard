@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { GraphContainer } from '../../template/graphContainer/GraphContainer';
 import numeral from 'numeral';
-import { Period } from '../../template/graphContainer/Period';
 import { usePromise } from '../../hooks/usePromise';
 import { ServicesContext } from '../../context/ServicesContext';
-import { chartLabel } from "../../hooks/blockNumbers.util";
+import { chartLabel } from '../../hooks/blockNumbers.util';
+import { usePeriod } from '../../hooks/usePeriod';
 
 export function AragonParticipantsChart() {
   const services = useContext(ServicesContext);
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLight ? lightTheme : darkTheme;
-  const [period, setPeriod] = useState(Period.M1);
+  const [period, setPeriod] = usePeriod();
   const { loading, error, data } = usePromise(services.antParticipants.timeseries(period), [period]);
 
   const handlePeriodChange = (period) => {
@@ -33,7 +33,7 @@ export function AragonParticipantsChart() {
     const graphData = data.map((data) => {
       return {
         value: data.value,
-        label: chartLabel(data.timestamp)
+        label: chartLabel(data.timestamp),
       };
     });
     const lastPoint = graphData[graphData.length - 1];
