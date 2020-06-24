@@ -16,7 +16,7 @@ export function AragonDaoContainer() {
           borderColor: theme.borderColor,
         }}
       >
-        <h3 style={{ color: theme.metricBoxHeaderTitle }}>ARAGON NETWORK DAO</h3>
+        <h3 style={{ color: theme.metricBoxHeaderTitle }}>ARAGON NETWORK</h3>
         <h6 style={{ color: theme.metricBoxHelper }}>
           <a
             style={{ color: theme.titleHelper, textDecoration: 'none' }}
