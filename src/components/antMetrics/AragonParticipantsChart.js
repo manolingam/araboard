@@ -40,7 +40,7 @@ export function AragonParticipantsChart() {
     const lastParticipants = numeral(lastPoint?.value).format('0.0a');
     return (
       <GraphContainer
-        title="Participants"
+        title="Tokenholders"
         metric={lastParticipants}
         data={graphData}
         period={period}

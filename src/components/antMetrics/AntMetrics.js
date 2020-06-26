@@ -67,7 +67,7 @@ export function AntMetrics() {
             </h4>
           </div>
           <div className="individual-stats">
-            <h5 style={{ color: theme.antMetricStatsTitle }}>Mkt Cap</h5>
+            <h5 style={{ color: theme.antMetricStatsTitle }}>Network Val.</h5>
             <h4 style={{ color: theme.metricNumbers }}>
               <LoadingShield
                 loading={antMetrics.loading}
