@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AragonParticipantsChart } from './AragonParticipantsChart';
-import { TreasuryChart } from './TreasuryChart';
+// import { TreasuryChart } from './TreasuryChart';
 
 export function AragonDaoContainer() {
   const { isLight, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -30,6 +30,7 @@ export function AragonDaoContainer() {
       </div>
       <div className="stats ant-metrics-stats" style={{ backgroundColor: theme.metricBoxBg }}>
         <AragonParticipantsChart />
+        {/* <TreasuryChart /> */}
       </div>
     </div>
   );
