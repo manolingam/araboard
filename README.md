@@ -1,3 +1,11 @@
+# Aragon Network Stats
+
+The Aragon Network is a digital jurisdiction that offers services to DAOs. It does so via linked protocols like Aragon Court. All these linked protocols have their tokens linked to ANT — the native token of the Aragon Network.
+
+![app](https://manolingam-team-bucket.storage.fleek.co/Assets/aragon_network_stats_snapshot.png)
+
+--------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
