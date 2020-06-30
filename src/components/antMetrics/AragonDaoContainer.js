@@ -30,7 +30,6 @@ export function AragonDaoContainer() {
       </div>
       <div className="stats ant-metrics-stats" style={{ backgroundColor: theme.metricBoxBg }}>
         <AragonParticipantsChart />
-        <TreasuryChart />
       </div>
     </div>
   );
