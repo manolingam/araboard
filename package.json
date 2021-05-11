@@ -16,7 +16,7 @@
     "graphql": "^15.0.0",
     "graphql-request": "^2.0.0",
     "graphql-tag": "^2.10.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "luxon": "^1.24.1",
     "numeral": "^2.0.6",
     "react": "^16.13.1",
